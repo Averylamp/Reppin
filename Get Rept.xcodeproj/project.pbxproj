@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB00816B1CB08F5000BA86C7 /* TestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081601CB08F5000BA86C7 /* TestViewController.mm */; };
+		BB00816C1CB08F5000BA86C7 /* VideoSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081621CB08F5000BA86C7 /* VideoSource.mm */; };
+		BB00816D1CB08F5000BA86C7 /* ImageProcessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081651CB08F5000BA86C7 /* ImageProcessor.mm */; };
+		BB00816E1CB08F5000BA86C7 /* BallTrack.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081671CB08F5000BA86C7 /* BallTrack.mm */; };
+		BB00816F1CB08F5000BA86C7 /* Global.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081691CB08F5000BA86C7 /* Global.mm */; };
+		BB00817C1CB08F7400BA86C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081701CB08F7400BA86C7 /* CoreGraphics.framework */; };
+		BB00817D1CB08F7500BA86C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081711CB08F7400BA86C7 /* Foundation.framework */; };
+		BB00817F1CB08F7500BA86C7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081731CB08F7400BA86C7 /* AVFoundation.framework */; };
+		BB0081801CB08F7500BA86C7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081741CB08F7400BA86C7 /* OpenGLES.framework */; };
+		BB0081811CB08F7500BA86C7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081751CB08F7400BA86C7 /* GLKit.framework */; };
+		BB0081821CB08F7500BA86C7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081761CB08F7400BA86C7 /* CoreMedia.framework */; };
+		BB0081831CB08F7500BA86C7 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081771CB08F7400BA86C7 /* CoreImage.framework */; };
+		BB0081841CB08F7500BA86C7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081781CB08F7400BA86C7 /* QuartzCore.framework */; };
+		BB0081851CB08F7500BA86C7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081791CB08F7400BA86C7 /* CoreVideo.framework */; };
+		BB0081861CB08F7500BA86C7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */; };
+		BB0081871CB08F7500BA86C7 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB00817B1CB08F7400BA86C7 /* opencv2.framework */; };
 		BBEE63811CB08F0400AF4FE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */; };
 		BBEE63831CB08F0400AF4FE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE63821CB08F0400AF4FE2 /* ViewController.swift */; };
 		BBEE63861CB08F0400AF4FE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBEE63841CB08F0400AF4FE2 /* Main.storyboard */; };
@@ -35,6 +51,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB00815E1CB08F4F00BA86C7 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		BB00815F1CB08F5000BA86C7 /* TestViewController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TestViewController.hpp; sourceTree = "<group>"; };
+		BB0081601CB08F5000BA86C7 /* TestViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestViewController.mm; sourceTree = "<group>"; };
+		BB0081611CB08F5000BA86C7 /* VideoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSource.h; sourceTree = "<group>"; };
+		BB0081621CB08F5000BA86C7 /* VideoSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoSource.mm; sourceTree = "<group>"; };
+		BB0081631CB08F5000BA86C7 /* VideoFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VideoFrame.hpp; sourceTree = "<group>"; };
+		BB0081641CB08F5000BA86C7 /* ImageProcessor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageProcessor.hpp; sourceTree = "<group>"; };
+		BB0081651CB08F5000BA86C7 /* ImageProcessor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageProcessor.mm; sourceTree = "<group>"; };
+		BB0081661CB08F5000BA86C7 /* BallTrack.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BallTrack.hpp; sourceTree = "<group>"; };
+		BB0081671CB08F5000BA86C7 /* BallTrack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BallTrack.mm; sourceTree = "<group>"; };
+		BB0081681CB08F5000BA86C7 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		BB0081691CB08F5000BA86C7 /* Global.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Global.mm; sourceTree = "<group>"; };
+		BB00816A1CB08F5000BA86C7 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		BB0081701CB08F7400BA86C7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreGraphics.framework; sourceTree = "<group>"; };
+		BB0081711CB08F7400BA86C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Foundation.framework; sourceTree = "<group>"; };
+		BB0081731CB08F7400BA86C7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVFoundation.framework; sourceTree = "<group>"; };
+		BB0081741CB08F7400BA86C7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenGLES.framework; sourceTree = "<group>"; };
+		BB0081751CB08F7400BA86C7 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GLKit.framework; sourceTree = "<group>"; };
+		BB0081761CB08F7400BA86C7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreMedia.framework; sourceTree = "<group>"; };
+		BB0081771CB08F7400BA86C7 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreImage.framework; sourceTree = "<group>"; };
+		BB0081781CB08F7400BA86C7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QuartzCore.framework; sourceTree = "<group>"; };
+		BB0081791CB08F7400BA86C7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreVideo.framework; sourceTree = "<group>"; };
+		BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AssetsLibrary.framework; sourceTree = "<group>"; };
+		BB00817B1CB08F7400BA86C7 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		BBEE637D1CB08F0400AF4FE2 /* Get Rept.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Get Rept.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBEE63821CB08F0400AF4FE2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +96,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0081801CB08F7500BA86C7 /* OpenGLES.framework in Frameworks */,
+				BB00817F1CB08F7500BA86C7 /* AVFoundation.framework in Frameworks */,
+				BB00817C1CB08F7400BA86C7 /* CoreGraphics.framework in Frameworks */,
+				BB0081831CB08F7500BA86C7 /* CoreImage.framework in Frameworks */,
+				BB0081811CB08F7500BA86C7 /* GLKit.framework in Frameworks */,
+				BB0081871CB08F7500BA86C7 /* opencv2.framework in Frameworks */,
+				BB00817D1CB08F7500BA86C7 /* Foundation.framework in Frameworks */,
+				BB0081821CB08F7500BA86C7 /* CoreMedia.framework in Frameworks */,
+				BB0081861CB08F7500BA86C7 /* AssetsLibrary.framework in Frameworks */,
+				BB0081841CB08F7500BA86C7 /* QuartzCore.framework in Frameworks */,
+				BB0081851CB08F7500BA86C7 /* CoreVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,13 +150,37 @@
 		BBEE637F1CB08F0400AF4FE2 /* Get Rept */ = {
 			isa = PBXGroup;
 			children = (
+				BB0081701CB08F7400BA86C7 /* CoreGraphics.framework */,
+				BB0081711CB08F7400BA86C7 /* Foundation.framework */,
+				BB0081731CB08F7400BA86C7 /* AVFoundation.framework */,
+				BB0081741CB08F7400BA86C7 /* OpenGLES.framework */,
+				BB0081751CB08F7400BA86C7 /* GLKit.framework */,
+				BB0081761CB08F7400BA86C7 /* CoreMedia.framework */,
+				BB0081771CB08F7400BA86C7 /* CoreImage.framework */,
+				BB0081781CB08F7400BA86C7 /* QuartzCore.framework */,
+				BB0081791CB08F7400BA86C7 /* CoreVideo.framework */,
+				BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */,
+				BB00817B1CB08F7400BA86C7 /* opencv2.framework */,
 				BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */,
 				BBEE63821CB08F0400AF4FE2 /* ViewController.swift */,
 				BBEE63841CB08F0400AF4FE2 /* Main.storyboard */,
+				BB00815F1CB08F5000BA86C7 /* TestViewController.hpp */,
+				BB0081601CB08F5000BA86C7 /* TestViewController.mm */,
+				BB0081611CB08F5000BA86C7 /* VideoSource.h */,
+				BB0081621CB08F5000BA86C7 /* VideoSource.mm */,
+				BB0081631CB08F5000BA86C7 /* VideoFrame.hpp */,
+				BB0081641CB08F5000BA86C7 /* ImageProcessor.hpp */,
+				BB0081651CB08F5000BA86C7 /* ImageProcessor.mm */,
+				BB0081661CB08F5000BA86C7 /* BallTrack.hpp */,
+				BB0081671CB08F5000BA86C7 /* BallTrack.mm */,
+				BB0081681CB08F5000BA86C7 /* Global.h */,
+				BB0081691CB08F5000BA86C7 /* Global.mm */,
+				BB00816A1CB08F5000BA86C7 /* PrefixHeader.pch */,
 				BBEE638A1CB08F0400AF4FE2 /* Assets.xcassets */,
 				BBEE638C1CB08F0400AF4FE2 /* LaunchScreen.storyboard */,
 				BBEE638F1CB08F0400AF4FE2 /* Info.plist */,
 				BBEE63871CB08F0400AF4FE2 /* Get_Rept.xcdatamodeld */,
+				BB00815E1CB08F4F00BA86C7 /* Bridging-Header.h */,
 			);
 			path = "Get Rept";
 			sourceTree = "<group>";
@@ -259,9 +334,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB00816C1CB08F5000BA86C7 /* VideoSource.mm in Sources */,
+				BB00816B1CB08F5000BA86C7 /* TestViewController.mm in Sources */,
+				BB00816F1CB08F5000BA86C7 /* Global.mm in Sources */,
 				BBEE63831CB08F0400AF4FE2 /* ViewController.swift in Sources */,
 				BBEE63811CB08F0400AF4FE2 /* AppDelegate.swift in Sources */,
+				BB00816D1CB08F5000BA86C7 /* ImageProcessor.mm in Sources */,
 				BBEE63891CB08F0400AF4FE2 /* Get_Rept.xcdatamodeld in Sources */,
+				BB00816E1CB08F5000BA86C7 /* BallTrack.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,10 +483,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Get",
+					Rept,
+				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Isometric.Get-Rept";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Get Rept/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -414,10 +503,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Get",
+					Rept,
+				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Isometric.Get-Rept";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Get Rept/Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -486,6 +583,7 @@
 				BBEE63AA1CB08F0400AF4FE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBEE63AB1CB08F0400AF4FE2 /* Build configuration list for PBXNativeTarget "Get ReptTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +592,7 @@
 				BBEE63AD1CB08F0400AF4FE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBEE63AE1CB08F0400AF4FE2 /* Build configuration list for PBXNativeTarget "Get ReptUITests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +601,7 @@
 				BBEE63B01CB08F0400AF4FE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
