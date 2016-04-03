@@ -498,6 +498,8 @@
 					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
@@ -520,6 +522,8 @@
 					"$(PROJECT_DIR)/Get",
 					Rept,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Get",
+					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
 					"$(PROJECT_DIR)/Get",
