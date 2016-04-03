@@ -69,7 +69,6 @@ class ReppinViewController: UIViewController {
     }
     
     func reppppin() {
-        cv.reps += 1
         var myUtterance : AVSpeechUtterance
         if cv.reps % repTarget == 0 {
             myUtterance = AVSpeechUtterance(string: "\(cv.reps). Nice set! Relax for 15 seconds, then touch the screen to start your next set")
