@@ -345,24 +345,27 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
         if (pks.size() > 0) { // if there are 3 peaks detected
             double* temp = new double[pks.size()];
             double sum = 0;
-            for (int i = 1; i < pks.size(); i++) {
+            double avg = 0;
+
+            if (pks.size() >= 4){
+                for (int i = pks.size() - 3; i < pks.size(); i++) {
                 
                 temp[i] = (track_t.at(pks.at(i)) - track_t.at(pks.at(i - 1))) / 1000; // to seconds
                 sum = sum + temp[i];
+                }
+                avg = sum / 3;
             }
             
-           double avg = sum / (pks.size() - 1);
-          
 
             dribbleRate = 1.0 / avg;
             
-            NSLog(@"# Peaks = %d", (pks.size() - 1) );
+            NSLog(@"# Peaks = %d", (pks.size()) );
             NSLog(@"Avg Delta Peak = %f", avg);
             NSLog(@"DPS = %f", dribbleRate);
             NSLog(@"Length Before = %ld", track_x.size() );
 
             
-            int lastPeak = pks.at(pks.size() - 1);
+            int lastPeak = pks.at(pks.size()-1);
             
             // pop everything in List form 0 to lastPeak
 //            track_x.erase(track_x.begin(),track_x.begin()+ lastPeak);
@@ -467,7 +470,7 @@ void applyMask(cv::Mat mCameraFrame, cv::Mat mColorMask, cv::Mat mFilteredFrame)
      if (first_timestamp > 0) {
         return (int) ((timestamp - first_timestamp));
     } else {
-        NSLog(@"STaRTED");
+        NSLog(@"STARTED");
         first_timestamp = timestamp;
         return 0;
     }
