@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 
+
 class ReppinViewController: UIViewController {
     
     @IBOutlet var cv: CounterView!
@@ -45,6 +46,23 @@ class ReppinViewController: UIViewController {
 //        tv.frame = self.view.frame;
 //        self.view.addSubview(testVC.view)
         
+        let displayLink = CADisplayLink(target: self, selector: #selector(ReppinViewController.update))
+        displayLink.frameInterval = 1
+        displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+        
+    }
+    
+    let startTime = CACurrentMediaTime()
+    
+    
+    func update(){
+        
+        let globalValues = Global.sharedManager() as! Global
+        if currentReps != Int(globalValues.currentRepCount){
+            currentReps = Int(globalValues.currentRepCount);
+            cv.reps = Int(globalValues.currentRepPerSec);
+            reppppin()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,8 +71,6 @@ class ReppinViewController: UIViewController {
     }
     
     func reppppin() {
-        currentReps += 1
-        cv.reps += 1
         var myUtterance : AVSpeechUtterance
         if currentReps % numReps == 0 {
             myUtterance = AVSpeechUtterance(string: "\(currentReps). Nice set! Relax for 15 seconds, then touch the screen to start your next set")
