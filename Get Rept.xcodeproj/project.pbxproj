@@ -280,6 +280,11 @@
 					BBEE637C1CB08F0400AF4FE2 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 9XWYL3K4YT;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					BBEE63931CB08F0400AF4FE2 = {
 						CreatedOnToolsVersion = 7.3;
