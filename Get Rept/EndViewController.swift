@@ -72,7 +72,10 @@ class EndViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+//        let global = Global.sharedManager() as! Global
+//        print("Data \(global.allRepData) Size = \(global.allRepData.count )")
+//        
         // Do any additional setup after loading the view.
     }
 

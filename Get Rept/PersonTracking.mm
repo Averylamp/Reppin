@@ -52,8 +52,6 @@ std::vector<int> repData;
 
 static int DRIBBLE_PEAK_THRESHOLD = 125; // was 35
 
-
-
 static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
 //int errorPersist=0;
 
@@ -174,9 +172,9 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
         for (int i = 0; i < repData.size(); i++){
             NSNumber* frame = [NSNumber numberWithInt: track_y.at(i)];
             NSNumber* time = [NSNumber numberWithDouble:track_t.at(repData.at(i))];
-            NSArray *data = [NSArray arrayWithObjects: frame, time, nil ];
+            NSArray *data = @[frame, time];
             [rawRepData addObject: data];
-            
+            [global.allRepData addObject:rawRepData];
         }
         
         clear_TrackingDuration();

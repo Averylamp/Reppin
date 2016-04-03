@@ -13,7 +13,7 @@ import AVFoundation
 class ReppinViewController: UIViewController {
     var setTarget: Int = 3
     var repTarget: Int = 10
-    
+    var workoutData = NSMutableArray()
     @IBOutlet var cv: CounterView!
     let gv = GradientView()
     let tv = UIView()
@@ -26,6 +26,9 @@ class ReppinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        NSUserDefaults.standardUserDefaults().setValue(workoutData, forKey: "workOutData")
         
         // Do any additional setup after loading the view.
         let repbtn = UIButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: 100, height: 800)))
@@ -49,7 +52,7 @@ class ReppinViewController: UIViewController {
         displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
         let global = Global.sharedManager() as! Global
         global.repsPerSet = Int32(repTarget)
-        
+        global.allRepData = NSMutableArray()
     }
     
     let startTime = CACurrentMediaTime()
@@ -73,7 +76,7 @@ class ReppinViewController: UIViewController {
     
     func reppppin() {
         var myUtterance : AVSpeechUtterance
-        if cv.reps % cv.maxReps == 0  && cv.reps  != 0 {
+        if cv.reps % cv.maxReps == 0 || cv.reps >= cv.maxReps  && cv.reps  != 0 {
             myUtterance = AVSpeechUtterance(string: "\(cv.reps). Nice set! Relax for 15 seconds, then touch the screen to start your next set")
             cv.reps = 0
             settttin()
@@ -96,11 +99,13 @@ class ReppinViewController: UIViewController {
         cv.setFinished()
         print("CV SETS \(cv.sets)")
         
-        if (cv.sets == cv.maxSets) {
+//        print("global data \(Global.sharedManager().)")
+        
+        if (cv.sets >= cv.maxSets) {
             presentViewController(EndViewController(), animated: true, completion: nil)
  
         }
-        let delay = 3.5 * Double(NSEC_PER_SEC)
+        let delay = 1.5 * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue()) {
             self.setted = false

@@ -28,6 +28,8 @@
 
 @property int* LowerSpect;
 @property int* UpperSpect;
+
+@property NSMutableArray * allRepData;
 //public static Scalar[] LowerSpect = new Scalar[2];
 //public static Scalar[] UpperSpect = new Scalar[2];
 

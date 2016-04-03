@@ -35,6 +35,7 @@
         self.DETECT_PERSON=8;
         self.WAIT_FOR_START = 9;
         
+        self.allRepData = [[NSMutableArray alloc]init];
         
         self.currentRepCount = 0;
         self.currentRepPerSec = 0;
