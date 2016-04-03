@@ -190,6 +190,9 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
         case 7:
 //            resultImage = [ballTracker errorTrack];
             break;
+        case 8:
+            resultImage = [self findPerson:image];
+            break;
         default:
 //            notifyHandler "Error Lighting"
             break;
@@ -198,6 +201,19 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
     
     return resultImage;
     }
+
+-(UIImage*)findPerson:(cv::Mat)image{
+    cv::Mat imgHSV;
+    cv::cvtColor(image, imgHSV, COLOR_RGB2HSV);
+    [self determineColorOfShirt:image];
+    
+    
+    UIImage * test = cvMatToUIImage(image);
+    //    UIImage * test = deb ? cvMatToUIImage(image) :  cvMatToUIImage(image2);
+    image.release();
+    
+    return test;
+}
 
 -(UIImage*)search:(cv::Mat)image{
     
@@ -260,6 +276,7 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
         } //end if logo was detected
     }
     
+    [self processLogoMatch:image rect:roi point:matchLoc logo:chosenLogoMat];
     
     // If a logo was detected
     if (matchLoc.x != -1){
@@ -273,7 +290,6 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
         clear_logoDetectDuration();
     }
     
-    drawFocusBox(image, roi);
     
     
     UIImage * test = cvMatToUIImage(image);
@@ -344,33 +360,49 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
     response[2] = (int) matchLoc.y;
 }
 
-void drawFocusBox(cv::Mat img, cv::Rect roi){
-    int thickness = 7;
+
+-(void)  determineColorOfShirt:(cv::Mat) img {
     
-    // Top Left Corner
-    int x = roi.x-1;
-    int y = roi.y-1;
-    cv::line(img, cv::Point(x,y), cv::Point(x, y+roi.height/4), BLUE_COLOR, thickness );
-    cv::line(img, cv::Point(x,y), cv::Point(x+roi.width/4, y), BLUE_COLOR, thickness );
+    cv::Mat imgHSV;
+    cv::cvtColor(img , imgHSV, cv::COLOR_RGB2HSV);
     
-    // Bottom Left Corner
-    y= y+roi.height;
-    cv::line(img, cv::Point(x,y), cv::Point(x,y-roi.height/4), BLUE_COLOR, thickness);
-    cv::line(img, cv::Point(x,y), cv::Point(x+roi.width/4,y), BLUE_COLOR, thickness);
+    int screenWidth = img.cols;
+    int screenHeight = img.rows;
+
+    std::vector<int*> pixel;
+    std::vector<int> H_List;
+
+    for ( int y = 0; y < screenHeight - 1; y++ ){
+        for ( int x = 0; x < screenWidth - 1; x++ ){
+            Vec3b hsvValue = imgHSV.at<Vec3b>(x, y);
+            int H = hsvValue.val[0];  // = imgHSV.get(y,x)[0];
+            int S = hsvValue.val[1];  // = imgHSV.get(y, x)[1];
+            int V = hsvValue.val[2];  // = imgHSV.get(y, x)[2];
+            
+            int * hsv = new int [3];
+            hsv[0] = H;
+            hsv[1] = S;
+            hsv[2] = V;
+            
+            pixel.push_back(hsv);
+//            NSLog(@"HSV - %d:%d:%d", H, S, V);
+            if (S > 255 / 2 && V > 255 / 2){
+                H_List.push_back(H);
+            }
+            
+            
+            
+        }
+    }
     
-    // Top Right Corner
-    x = roi.x+roi.width+1;
-    y = roi.y+1;
-    cv::line(img, cv::Point(x,y), cv::Point(x-roi.width/4,y), BLUE_COLOR, thickness);
-    cv::line(img, cv::Point(x,y), cv::Point(x,y+roi.height/4), BLUE_COLOR, thickness);
+    for (int i = 0; i < H_List.size(), i++){
+        NSLog(@"HVAls - %d",H_List[i]);
+    }
     
-    // Bottom Right Corner
-    x = roi.x+roi.width+1;
-    y = roi.y+roi.height+1;
-    cv::line(img, cv::Point(x,y), cv::Point(x-roi.width/4,y), BLUE_COLOR, thickness);
-    cv::line(img, cv::Point(x,y), cv::Point(x,y-roi.height/4), BLUE_COLOR, thickness);
     
 }
+
+
 
 //-(void)processLogoMatch:(cv::Mat) img rect:(cv::Rect) roi point:(cv::Point) matchLoc logo:(cv::Mat) logoImg{
 //    
@@ -391,7 +423,7 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
     
     double logoDuration = logoDetectDuration();
     // if the Logo was detected for longer than the predefined Threshold time
-    if( logoDuration >= LOGO_FRAME_THRESHOLD ){
+    if( logoDuration >= 0 ){
         NSLog(@"LONGER THAN THRESHOLD");
 
         // if the log was detected for longer thn the predefined Threshold time
@@ -437,7 +469,7 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
                     int H = hsvValue.val[0];  // = imgHSV.get(y,x)[0];
                     int S = hsvValue.val[1];  // = imgHSV.get(y, x)[1];
                     int V = hsvValue.val[2];  // = imgHSV.get(y, x)[2];
-                    
+//                    NSLog(@"H - %d  S - %d  V -  %d",H,S,V);
                     // if the Color is within the Bounds of Reasonable color
                     // meaning the color isn't white or yellow or anything
                     if( isBallColor(H, S, V) ){ // Within the possible HSV value for the ball color
@@ -445,12 +477,12 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
                         
                         // H in openCV is weird, you need to wrap it around by 90
                         // e.g.  91 becomes 1, 100 becomes 10  BUT 89 stays 89, 35 stays 35
-                        if( H >= 90 ){
-                            H = H-90;
-                        }
-                        else{
-                            H = H+90;
-                        }
+//                        if( H >= 90 ){
+//                            H = H-90;
+//                        }
+//                        else{
+//                            H = H+90;
+//                        }
                         
                         //Append this Pixel's color value to the Pixel Array
                         int* hsv = new int [3];
@@ -460,7 +492,10 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
                         pixel.push_back(hsv);
                         //*************DJFHDSJFHSDJFHDFJHDS//////
                         // append the H value to the H list array
-                        H_List.push_back(H);
+                        
+//                        if (S > 256 / 2 && V > 256 / 2){
+                            H_List.push_back(H);
+//                        }
                     }
                     else{ // if this pixel is not a possible color on the ball (e.g. black, blue, white)
                         rejectedPixels += 1; // increment the rejected pixels count
@@ -470,8 +505,8 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
         } //for every row in a frame
         
         
-        NSLog(@"Ball Area - %ld",ballArea);
-        NSLog(@"Rejected Pixels - %ld",rejectedPixels);
+//        NSLog(@"Ball Area - %ld",ballArea);
+//        NSLog(@"Rejected Pixels - %ld",rejectedPixels);
 
         imgHSV.release(); // release this Mat, we're not using it anymore
         
@@ -485,8 +520,11 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
         
         // Calculate the Histogram for H values
         int * H_mode = histog( H_List, 90, 2 ); // returns histogram array
-        
-
+       
+        for(int i = 0; i < 90; i++){
+//                        NSLog(@"H%d: %d",i,H_mode[i]);
+        }
+        return;
         int * H_range = calc_rangeValue( H_mode, kH, 2, 90); // returns the [lower_range_limit, higher_range_limit]
         NSLog(@"H Range - %d - %d", H_range[0], H_range[1]);
         
@@ -499,7 +537,7 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
         //        int V_List[0]; //vd: change this to mutable array
         std::vector<int> S_list;
         std::vector<int> V_list;
-        
+        std::vector<int> H_list;
         long s_sum = 0;
         
         //for every pixel
@@ -513,6 +551,7 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
             if( h >= H_range[0] && h <= H_range[1] ){ // if this pixel's h value is within H_range limits
                 S_list.push_back(s);
                 V_list.push_back(v);
+                H_list.push_back(h);
                 // APPEND s value to S_list array
                 // APPEND v vale to V_list array
             }
@@ -535,7 +574,7 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
 
         
         for(int i = 0; i < 256/8; i++){
-            NSLog(@"%d: %d",i*8,S_mode[i]);
+//            NSLog(@"%d: %d",i*8,S_mode[i]);
         }
         
         
@@ -562,7 +601,7 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
         
         
         for(int i = 0; i < 256/8; i++){
-            NSLog(@"%d: %d",i*8,V_mode[i]);
+//            NSLog(@"%d: %d",i*8,H_mode[i]);
         }
 
         
@@ -585,7 +624,7 @@ void drawFocusBox(cv::Mat img, cv::Rect roi){
         
         // Update the Global state, Logo Detected so nect state should be Ball Tracking
 //        STATE = BALL_TRACKING;
-        global.STATE = global.BALL_TRACKING;
+//        global.STATE = global.BALL_TRACKING;
         
         //DEBUGGING STUFF INCLUDE LATER WHEN THERE'S TIME
         
@@ -609,7 +648,6 @@ static cv::Point findLogoMatch(cv::Mat cropImg, cv::Mat logoImg, int imageBrand)
     int match_method = 5;   // define Match Method for Logo Detection
     
     /// Do the Matching and Normalize
-    
     
     double minVal; double maxVal; cv::Point minLoc; cv::Point maxLoc;
     cv::Point matchLoc;
@@ -863,6 +901,7 @@ static int* histog( std::vector<int> myList, int max_int, int divider ){
     
     for( int i=0; i < myList.size(); i++ ){
         hist[ myList[i] / divider ] += 1;
+//        NSLog(@"hist: %d : %d :  %d", hist[myList[i] / divider], myList[i],i);
     }
     return hist;
 }

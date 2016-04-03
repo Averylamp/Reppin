@@ -61,18 +61,14 @@
     }
 
 -(void)viewDidAppear:(BOOL)animated{
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     Global * global = [Global sharedManager];
-    global.STATE = global.LOGO_DETECTION;
+    global.STATE = global.DETECT_PERSON;
     NSLog(@"State - %d", global.LOGO_DETECTION);
     [self.videoSource.captureSession startRunning];
     [self.imageProcessor clearTrackingDurations];
 }
 
--(UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskLandscapeLeft;
-}
+
 
 
 //-(BOOL)shouldAutorotate{

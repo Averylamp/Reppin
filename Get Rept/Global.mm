@@ -32,6 +32,9 @@
         self.TIME_LEFT = 5;
         self.ERROR_LIGHTING=6;
         self.ERROR_BLOBS=7;
+        self.DETECT_PERSON=8;
+        self.TRACK_PERSON = 9;
+        
         
         self.CONFIDENCE_THRESHOLD = 40; // percentage confidence for a logo
         

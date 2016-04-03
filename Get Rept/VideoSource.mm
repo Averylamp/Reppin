@@ -155,7 +155,7 @@
 didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
        fromConnection:(AVCaptureConnection *)connection
 {
-    [connection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
+    [connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
     // (1) Convert CMSampleBufferRef to CVImageBufferRef
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     

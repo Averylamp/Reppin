@@ -17,6 +17,8 @@
 @property int TIME_LEFT;
 @property int ERROR_LIGHTING;
 @property int ERROR_BLOBS;
+@property int DETECT_PERSON;
+@property int TRACK_PERSON;
 
 @property int STATE;
 
