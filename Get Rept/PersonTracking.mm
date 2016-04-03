@@ -6,7 +6,7 @@
 //
 //
 
-#import "BallTrack.hpp"
+#import "PersonTracking.hpp"
 #import <opencv2/highgui/highgui_c.h>
 #import <opencv2/imgproc/imgproc_c.h>
 #import <opencv2/core/core_c.h>
@@ -17,7 +17,7 @@
 using std::vector;
 using namespace cv;
 
-@implementation BallTrack
+@implementation PersonTracking
 static int trackIndex = 0;
 static String TAG = "BallTracking";
 
@@ -69,48 +69,7 @@ static int BALL_MAX_RADIUS = 90;
 
 
 static int FRAMES_TO_CALC = 30; // how many frames to calculate dribble rate
-//
-////// EXPERIMENTAL, DO NOT PORT //
-////cv::Mat ErrorTrack(cv::Mat mCameraFrame) {
-////    // Convert Camera Frame to HSV format
-////    cv::Mat mCameraFrameHsv;
-////    cv::cvtColor(mCameraFrame, mCameraFrameHsv, COLOR_RGB2HSV);
-////    
-////    // Generate the Color Mask for the Color Spectrum Range calculated in LogoDetection
-////    cv::Mat mColorMask;
-////    
-////    makeColorMask(mCameraFrameHsv, Global.UpperSpect,LowerSpect, mColorMask);
-////    mCameraFrameHsv.release(); // erase this matrix, we're done with it
-////    
-////    // Dilate and Erode the Mask to Isolate the Ball better
-////    dilateErodeMask(mColorMask);
-////    
-////    // Apply ColorMask to mFilteredFrame
-////    Mat mFilteredFrame = new Mat();
-////    applyMask(mCameraFrame, mColorMask, mFilteredFrame);
-////    
-////    // Find Contours of Blobs
-////    List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
-////    findContours(mColorMask,contours);
-////    
-////    int[] response = findBiggestContour(contours, mColorMask);
-////    int maxContour_id = response[0];
-////    int ballSizedContours = response[1];
-////    
-////    
-////    mColorMask.release();
-////    mFilteredFrame.release();
-////    
-////    HighlightIssues(contours,mCameraFrame);
-////    
-////    if (ballSizedContours ==1) {
-////        Global.STATE = Global.BALL_TRACKING;
-////    }
-////    //Global.STATE = -1; // NONexistent state, just stop
-////    return mCameraFrame;
-////}
-//
-int errorPersist=0;
+//int errorPersist=0;
 
 // THIS IS THE MAIN CODE FOR TRACKING, IT RETURNS THE PROCESSED FRAME AND STORES THE POSITION
 -(UIImage*) Track:(cv::Mat) mCameraFrame {
@@ -275,65 +234,6 @@ void DebugText_Ball(cv::Mat mColorMask, double area, int ballSizedContours, int 
 //                 Core.FONT_HERSHEY_DUPLEX, .5, new Scalar(200, 200, 250), 1);
     
 }
-//
-//
-// void DebugText_TrackingModel(Mat mColorMask,int ballSizedContours) {
-//    int FPS = calcFPS();
-//    Log.d(TAG, "Custom FPS rate = " + Integer.toString(FPS));
-//
-//    String text = "(" + Global.UpperSpect[0].toString() + "-"+ Global.UpperSpect[1].toString() + ")";
-//    String text2 = "(" + Global.LowerSpect[0].toString() + "-"+ Global.LowerSpect[1].toString() + ")";
-//    
-//    Log.d(TAG, text);
-//    Log.d(TAG, text2);
-//    
-//    Core.putText(mColorMask, text, new Point(60, 230),
-//                 Core.FONT_HERSHEY_DUPLEX, .4, new Scalar(200, 200, 250), 1);
-//    Core.putText(mColorMask, text2, new Point(60, 250),
-//                 Core.FONT_HERSHEY_DUPLEX, .4, new Scalar(200, 200, 250), 1);
-//    
-//    Core.putText(mColorMask, Integer.toString(FPS), new Point(20, 34),
-//                 Core.FONT_HERSHEY_DUPLEX, 2, new Scalar(200, 200, 250), 1);
-//    
-//    Core.putText(mColorMask, "AvgV= " + Integer.toString( (Global.V_limit[1] + Global.V_limit[0])/2 ),
-//                 new Point(10, 50),
-//                 Core.FONT_HERSHEY_DUPLEX, .6, new Scalar(200, 200, 250), 1);
-//    
-//    Core.putText(mColorMask, "PeakV= " + Integer.toString( Global.peakV ),
-//                 new Point(10, 150), Core.FONT_HERSHEY_DUPLEX, .6, new Scalar(200, 200, 250), 1);
-//    
-//    
-//    Core.putText(mColorMask, "Sran= "+ Integer.toString( Global.S_limit[1]-Global.S_limit[0] ),
-//                 new Point(10, 80),Core.FONT_HERSHEY_DUPLEX, .6, new Scalar(200, 200, 250), 1);
-//    
-//    Core.putText(mColorMask,  "PeakS="+Integer.toString(Global.peakS ),
-//                 new Point(10, 100),Core.FONT_HERSHEY_DUPLEX, .6, new Scalar(200, 200, 250), 1);
-//    Core.putText(mColorMask,  "AvgS="+Integer.toString(Global.S_mean ),
-//                 new Point(10, 120),Core.FONT_HERSHEY_DUPLEX, .6, new Scalar(200, 200, 250), 1);
-//    
-//    Core.putText(mColorMask, "Rej= "+ Long.toString( Global.rejectedPixels ),
-//                 new Point(230, 180), Core.FONT_HERSHEY_DUPLEX, .6, new Scalar(200, 200, 250), 1);
-//    
-//    
-//    if ( (Global.S_limit[1]-Global.S_limit[0]) > 110 ) {
-//        Core.putText(mColorMask, "Bad Calibration Error!", new Point(60, 180),
-//                     Core.FONT_HERSHEY_DUPLEX, .8, new Scalar(200, 200, 250), 1);
-//    }
-//    
-//    if ( FPS < 11 ) {
-//        Core.putText(mColorMask, "Poor Lighting- Low FPS!", new Point(60, 200),
-//                     Core.FONT_HERSHEY_DUPLEX, .8, new Scalar(200, 200, 250), 1);
-//    }
-//    
-//    if ( (Global.V_limit[1] + Global.V_limit[0])/2 < 85 ) { // less than a 3rd of 255
-//        Core.putText(mColorMask, "Poor Lighting- Low V Avg.", new Point(60, 220),
-//                     Core.FONT_HERSHEY_DUPLEX, .8, new Scalar(200, 200, 250), 1);
-//    }
-//    //	if ( ballSizedContours >= 3 ) { // less than a 3rd of 255
-//    //		Core.putText(mColorMask, "Too many Objects", new Point(60, 240),
-//    //				Core.FONT_HERSHEY_DUPLEX, .8, new Scalar(200, 200, 250), 1);
-//    //	}
-//}
 
 void DrawBall(cv::Mat srcMat,int x ,int y) {
     int BALL_DRAW_RADIUS =  80; // was 40

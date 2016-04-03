@@ -11,7 +11,7 @@
 @interface Global : NSObject
 
 @property int LOGO_DETECTION;
-@property int BALL_TRACKING;
+@property int PERSON_TRACKING;
 @property int ANALYTICS;
 @property int DRIBBLE_SPEED;
 @property int TIME_LEFT;
@@ -27,6 +27,8 @@
 //public static Scalar[] LowerSpect = new Scalar[2];
 //public static Scalar[] UpperSpect = new Scalar[2];
 
+@property int minH;
+@property int maxH;
 
 @property int peakH;
 @property int peakS;

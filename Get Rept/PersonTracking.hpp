@@ -11,7 +11,7 @@
 #import <opencv2/opencv.hpp>
 #import "ImageProcessor.hpp"
 
-@interface BallTrack : NSObject
+@interface PersonTracking : NSObject
 @property ImageProcessor* imageProcessor;
 
 -(UIImage*) Track:(cv::Mat) mCameraFrame;

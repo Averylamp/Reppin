@@ -23,21 +23,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
+    
     Global * global = [Global sharedManager];
     global.STATE = global.LOGO_DETECTION;
     NSLog(@"State - %d", global.LOGO_DETECTION);
     self.imageProcessor = [[ImageProcessor alloc]init];
     
-//    UIApplication *application = [UIApplication sharedApplication];
-//    [application setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft
-//                                animated:YES];
-//    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-//    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    //    UIApplication *application = [UIApplication sharedApplication];
+    //    [application setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft
+    //                                animated:YES];
+    //    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    //    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     self.imageView = [[UIImageView alloc]init];
     [self.imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-//    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    //    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:self.imageView];
     
@@ -46,7 +46,7 @@
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     
-//    [self.imageView setHidden:YES];
+    //    [self.imageView setHidden:YES];
     self.videoSource = [[VideoSource alloc] init];
     self.videoSource.delegate = self;
     [self.videoSource startWithDevicePosition:AVCaptureDevicePositionFront];
@@ -57,8 +57,15 @@
     highSD = 255, highS = 255;
     highVD = 255, highV = 255;
     self.firstImage = true;
-     // Do any additional setup after loading the view.
-    }
+    
+    
+    UIButton* button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+    [button addTarget:self action: NSSelectorFromString(@"startTracking") forControlEvents:UIControlEventTouchUpInside];
+    [button setBackgroundColor:[UIColor greenColor]];
+    [self.view addSubview:button];
+    
+    // Do any additional setup after loading the view.
+}
 
 -(void)viewDidAppear:(BOOL)animated{
     Global * global = [Global sharedManager];
@@ -66,6 +73,11 @@
     NSLog(@"State - %d", global.LOGO_DETECTION);
     [self.videoSource.captureSession startRunning];
     [self.imageProcessor clearTrackingDurations];
+}
+
+-(void)startTracking{
+    Global * global = [Global sharedManager];
+    global.STATE = global.PERSON_TRACKING;
 }
 
 
@@ -77,7 +89,7 @@
 
 
 - (void)frameReady:(VideoFrame)frame{
-//    NSLog(@"Frame");
+    //    NSLog(@"Frame");
     
     if (self.firstImage){
         self.firstImage = NO;
@@ -87,7 +99,7 @@
         // Construct CGContextRef from VideoFrame
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         CGContextRef newContext = CGBitmapContextCreate(frame.data,
-                                                          frame.width,
+                                                        frame.width,
                                                         frame.height,
                                                         8,
                                                         frame.stride,
@@ -100,33 +112,33 @@
         
         // Construct UIImage from CGImageRef
         UIImage * image = [UIImage imageWithCGImage:newImage];
-
+        
         image = [self.imageProcessor processImage:image debug:NO values:@[[NSNumber numberWithDouble:lowH],[NSNumber numberWithDouble:lowS],[NSNumber numberWithDouble:lowV],[NSNumber numberWithDouble:highH], [NSNumber numberWithDouble:highS], [NSNumber numberWithDouble:highV]]] ;
         
         [self.imageView setImage:image];
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//        NSLog(@"Frame - %f, %f", image.size.width, image.size.height);
+        //        NSLog(@"Frame - %f, %f", image.size.width, image.size.height);
         
         Global *global = [Global sharedManager];
         if (global.STATE == 3){ // if Global State == Analytics
             [self.videoSource.captureSession stopRunning];
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:
                                         @"Main" bundle:[NSBundle mainBundle]];
-
-          
+            
+            
             // AVERY: STOP THE THREAD WITH ALL THE CAMERA FRAMES
             // AVERY: OPEN A NEW VIEW CONTROLLER
         }
         
         CGImageRelease(newImage);
         CGContextRelease(newContext);
-//                        CGColorSpaceRelease(colorSpace);
+        //                        CGColorSpaceRelease(colorSpace);
     });
 }
 
 
 - (void)didReceiveMemoryWarning {
-     // Dispose of any resources that can be recreated.
+    // Dispose of any resources that can be recreated.
 }
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {

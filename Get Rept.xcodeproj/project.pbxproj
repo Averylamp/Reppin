@@ -10,7 +10,7 @@
 		BB00816B1CB08F5000BA86C7 /* TestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081601CB08F5000BA86C7 /* TestViewController.mm */; };
 		BB00816C1CB08F5000BA86C7 /* VideoSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081621CB08F5000BA86C7 /* VideoSource.mm */; };
 		BB00816D1CB08F5000BA86C7 /* ImageProcessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081651CB08F5000BA86C7 /* ImageProcessor.mm */; };
-		BB00816E1CB08F5000BA86C7 /* BallTrack.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081671CB08F5000BA86C7 /* BallTrack.mm */; };
+		BB00816E1CB08F5000BA86C7 /* PersonTracking.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081671CB08F5000BA86C7 /* PersonTracking.mm */; };
 		BB00816F1CB08F5000BA86C7 /* Global.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081691CB08F5000BA86C7 /* Global.mm */; };
 		BB00817C1CB08F7400BA86C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081701CB08F7400BA86C7 /* CoreGraphics.framework */; };
 		BB00817D1CB08F7500BA86C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081711CB08F7400BA86C7 /* Foundation.framework */; };
@@ -23,6 +23,7 @@
 		BB0081851CB08F7500BA86C7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081791CB08F7400BA86C7 /* CoreVideo.framework */; };
 		BB0081861CB08F7500BA86C7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */; };
 		BB0081871CB08F7500BA86C7 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB00817B1CB08F7400BA86C7 /* opencv2.framework */; };
+		BB28545E1CB0B9CB00E277C3 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB28545D1CB0B9CB00E277C3 /* opencv2.framework */; };
 		BBEE63811CB08F0400AF4FE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */; };
 		BBEE63831CB08F0400AF4FE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE63821CB08F0400AF4FE2 /* ViewController.swift */; };
 		BBEE63861CB08F0400AF4FE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBEE63841CB08F0400AF4FE2 /* Main.storyboard */; };
@@ -59,8 +60,8 @@
 		BB0081631CB08F5000BA86C7 /* VideoFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VideoFrame.hpp; sourceTree = "<group>"; };
 		BB0081641CB08F5000BA86C7 /* ImageProcessor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageProcessor.hpp; sourceTree = "<group>"; };
 		BB0081651CB08F5000BA86C7 /* ImageProcessor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageProcessor.mm; sourceTree = "<group>"; };
-		BB0081661CB08F5000BA86C7 /* BallTrack.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BallTrack.hpp; sourceTree = "<group>"; };
-		BB0081671CB08F5000BA86C7 /* BallTrack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BallTrack.mm; sourceTree = "<group>"; };
+		BB0081661CB08F5000BA86C7 /* PersonTracking.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PersonTracking.hpp; sourceTree = "<group>"; };
+		BB0081671CB08F5000BA86C7 /* PersonTracking.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PersonTracking.mm; sourceTree = "<group>"; };
 		BB0081681CB08F5000BA86C7 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
 		BB0081691CB08F5000BA86C7 /* Global.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Global.mm; sourceTree = "<group>"; };
 		BB00816A1CB08F5000BA86C7 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		BB0081791CB08F7400BA86C7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreVideo.framework; sourceTree = "<group>"; };
 		BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AssetsLibrary.framework; sourceTree = "<group>"; };
 		BB00817B1CB08F7400BA86C7 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		BB28545D1CB0B9CB00E277C3 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "Get Rept/opencv2.framework"; sourceTree = "<group>"; };
 		BBEE637D1CB08F0400AF4FE2 /* Get Rept.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Get Rept.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBEE63821CB08F0400AF4FE2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				BB0081831CB08F7500BA86C7 /* CoreImage.framework in Frameworks */,
 				BB0081811CB08F7500BA86C7 /* GLKit.framework in Frameworks */,
 				BB0081871CB08F7500BA86C7 /* opencv2.framework in Frameworks */,
+				BB28545E1CB0B9CB00E277C3 /* opencv2.framework in Frameworks */,
 				BB00817D1CB08F7500BA86C7 /* Foundation.framework in Frameworks */,
 				BB0081821CB08F7500BA86C7 /* CoreMedia.framework in Frameworks */,
 				BB0081861CB08F7500BA86C7 /* AssetsLibrary.framework in Frameworks */,
@@ -130,6 +133,7 @@
 		BBEE63741CB08F0400AF4FE2 = {
 			isa = PBXGroup;
 			children = (
+				BB28545D1CB0B9CB00E277C3 /* opencv2.framework */,
 				BBEE637F1CB08F0400AF4FE2 /* Get Rept */,
 				BBEE63971CB08F0400AF4FE2 /* Get ReptTests */,
 				BBEE63A21CB08F0400AF4FE2 /* Get ReptUITests */,
@@ -171,8 +175,8 @@
 				BB0081631CB08F5000BA86C7 /* VideoFrame.hpp */,
 				BB0081641CB08F5000BA86C7 /* ImageProcessor.hpp */,
 				BB0081651CB08F5000BA86C7 /* ImageProcessor.mm */,
-				BB0081661CB08F5000BA86C7 /* BallTrack.hpp */,
-				BB0081671CB08F5000BA86C7 /* BallTrack.mm */,
+				BB0081661CB08F5000BA86C7 /* PersonTracking.hpp */,
+				BB0081671CB08F5000BA86C7 /* PersonTracking.mm */,
 				BB0081681CB08F5000BA86C7 /* Global.h */,
 				BB0081691CB08F5000BA86C7 /* Global.mm */,
 				BB00816A1CB08F5000BA86C7 /* PrefixHeader.pch */,
@@ -341,7 +345,7 @@
 				BBEE63811CB08F0400AF4FE2 /* AppDelegate.swift in Sources */,
 				BB00816D1CB08F5000BA86C7 /* ImageProcessor.mm in Sources */,
 				BBEE63891CB08F0400AF4FE2 /* Get_Rept.xcdatamodeld in Sources */,
-				BB00816E1CB08F5000BA86C7 /* BallTrack.mm in Sources */,
+				BB00816E1CB08F5000BA86C7 /* PersonTracking.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +493,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -507,6 +514,9 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Get",
+					Rept,
+					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Get",
 					Rept,
 				);

@@ -26,7 +26,7 @@
     if (self = [super init]) {
         // All final variables
         self.LOGO_DETECTION=1;
-        self.BALL_TRACKING=2;
+        self.PERSON_TRACKING=2;
         self.ANALYTICS=3;
         self.DRIBBLE_SPEED=4;
         self.TIME_LEFT = 5;
@@ -35,6 +35,9 @@
         self.DETECT_PERSON=8;
         self.TRACK_PERSON = 9;
         
+        
+        self.minH = 0;
+        self.maxH = 0;
         
         self.CONFIDENCE_THRESHOLD = 40; // percentage confidence for a logo
         

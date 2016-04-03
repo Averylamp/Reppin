@@ -6,7 +6,7 @@
 #import <opencv2/imgproc/imgproc_c.h>
 #import <opencv2/core/core_c.h>
 #import <vector>
-#import "BallTrack.hpp"
+#import "PersonTracking.hpp"
 #import "Global.h"
 
 using std::vector;
@@ -14,7 +14,7 @@ using namespace cv;
 @interface ImageProcessor()
 
 @property NSMutableArray *brandStrings;
-@property BallTrack* ballTracker;
+@property PersonTracking* personTracker;
 @property Global* global;
 @end
 
@@ -30,8 +30,7 @@ static int* V_limit;
 
 
 //public static final String serverURL = "http://192.168.1.5:8000";
-static String serverURL = "http://dribbleup.com";
-static String SessionKey = "e1fj7ph2glquw6lgnrvllfk4j0x3nml6";
+
 static int INVITED_STATUS=1;
 static int ACTIVE_STATUS=2;
 static int COMPLETED_STATUS=3;
@@ -58,9 +57,7 @@ static int S_mean=0;
 
 static Boolean DEBUG_TRACKING=true; // true to show the debug output, black and white
 
-//GLOBAL CONSTANTS
-String TAG = "LogoDetection";
-String TAG2 = "LogoNumbers";
+
 //Context appContext; //vd: what's this?
 
 double LOGO_FRAME_THRESHOLD = 1;
@@ -85,8 +82,8 @@ String brandString[] = {"UnderArmour", "Nike", "Wilson", "Spalding"};
 -(id)init {
     if (self = [super init]){
         // Initial values
-        self.ballTracker = [[BallTrack alloc]init];
-        self.ballTracker.imageProcessor = self;
+        self.personTracker = [[PersonTracking alloc]init];
+        self.personTracker.imageProcessor = self;
         
         self.global = [Global sharedManager];
         
@@ -125,11 +122,11 @@ String brandString[] = {"UnderArmour", "Nike", "Wilson", "Spalding"};
         cvUIImageToMat([UIImage imageNamed:@"spalding_120px"], logoImg_spalding[0]);
         cv::cvtColor(logoImg_spalding[0], logoImg_spalding[0], COLOR_BGR2GRAY);
         
-
+        
         
         logoImages.push_back(logoImg_ua);
         logoImages.push_back(logoImg_nike);
-//        logoImages.push_back(logoImg_wilson);
+        //        logoImages.push_back(logoImg_wilson);
         logoImages.push_back(logoImg_spalding);
         self.brandStrings = [[NSMutableArray alloc]initWithArray:@[@"Under Armour",@"Nike",@"Wilson",@"Spalding"]];
         self.brandStrings = [[NSMutableArray alloc]initWithArray:@[@"Under Armour",@"Nike",@"Spalding"]];
@@ -165,12 +162,12 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
 
 
 -(UIImage*)processImage:(UIImage*)img debug:(BOOL) deb values:(NSArray*) val{
-
+    
     Global *global = [Global sharedManager];
     
     RNG rng(12345);
     cv::Mat image;
-
+    
     cvUIImageToMat(img, image);
     cv::flip(image, image, 1);
     UIImage*resultImage;
@@ -180,7 +177,7 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
             resultImage = [self search:image];
             break;
         case 2: // Ball Tracking
-            resultImage = [self.ballTracker Track:image];
+            resultImage = [self.personTracker Track:image];
             break;
         case 3: // Analytics
             // TODO: Quit the Image Processing thing
@@ -188,19 +185,19 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
             // Show a new View Controller, the Analytics view
             break;
         case 7:
-//            resultImage = [ballTracker errorTrack];
+            //            resultImage = [ballTracker errorTrack];
             break;
         case 8:
             resultImage = [self findPerson:image];
             break;
         default:
-//            notifyHandler "Error Lighting"
+            //            notifyHandler "Error Lighting"
             break;
     }
     
     
     return resultImage;
-    }
+}
 
 -(UIImage*)findPerson:(cv::Mat)image{
     cv::Mat imgHSV;
@@ -211,6 +208,7 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
     UIImage * test = cvMatToUIImage(image);
     //    UIImage * test = deb ? cvMatToUIImage(image) :  cvMatToUIImage(image2);
     image.release();
+    imgHSV.release();
     
     return test;
 }
@@ -230,8 +228,8 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
     //    CGSize screenSize =   [[UIScreen mainScreen]bounds].size;
     
     // For 640
-//   cv::Rect roi = cv::Rect( (int) (screenWidth/2)-100, (int) (screenHeight /2)- 100, 200,200);
-  
+    //   cv::Rect roi = cv::Rect( (int) (screenWidth/2)-100, (int) (screenHeight /2)- 100, 200,200);
+    
     NSLog(@"ROI W=%d , H=%d " ,(int) (screenWidth/2), (int) (screenHeight /2) );
     // 176, 144
     
@@ -241,16 +239,16 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
     cv::Rect roi = cv::Rect( (int) (screenWidth/2)-100, (int) (screenHeight /2)-100, 150,150);
     // Top Left Corner is X,Y
     
-
+    
     
     cv::Mat cropImg = cv::Mat(img_scene, roi);
-
+    
     
     // Perform canny and clean up the frame for logo detection
     LogoFilter(cropImg);
     // Cleans up the Logo Area and Amplifies it
     
-
+    
     
     cv::Point matchLoc = cv::Point(-1,-1);
     int response[3];
@@ -261,15 +259,14 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
     cv::Mat chosenLogoMat;
     
     for (int i=0; i < logoImages.size() ;i++) { // For each Brand
-        NSLog(@"Search by Brand");
-
+        
+        
         SearchLogoBrand(cropImg, logoImages[i], response, i);// Search for logo of this brand
         chosenLogo = response[0]; // response[0] is the chosenLogo's id. Returns -1 if no logo detected for this brand
         if (chosenLogo != -1) { // if a logo was detected
             
             chosenBrand = brandString[i]; // chosenBrand is this one
             chosenLogoMat = logoImages[i][chosenLogo]; // chosenLogo Mat is this logo Mat
-            NSLog(@"CHOSEN BRAND %@", [self.brandStrings objectAtIndex:i]);
             matchLoc.x = response[1]; // X coordinate of logo detected on screen
             matchLoc.y = response[2]; // Y coordinate of logo detected on screen
             break;
@@ -297,7 +294,7 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
     image.release();
     img_scene.release();
     return test;
-
+    
 }
 static void LogoFilter(cv::Mat cropImg){
     
@@ -335,7 +332,7 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
             arrSize = 4;
             break;
         case 2:
-//            arrSize = 4;
+            //            arrSize = 4;
             arrSize = 1;
             break;
         case 3:
@@ -358,6 +355,9 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
     response[0] = chosenLogo;
     response[1] = (int) matchLoc.x;
     response[2] = (int) matchLoc.y;
+    
+    
+    
 }
 
 
@@ -368,10 +368,9 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
     
     int screenWidth = img.cols;
     int screenHeight = img.rows;
-
-    std::vector<int*> pixel;
+    
     std::vector<int> H_List;
-
+    
     for ( int y = 0; y < screenHeight - 1; y++ ){
         for ( int x = 0; x < screenWidth - 1; x++ ){
             Vec3b hsvValue = imgHSV.at<Vec3b>(x, y);
@@ -379,13 +378,7 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
             int S = hsvValue.val[1];  // = imgHSV.get(y, x)[1];
             int V = hsvValue.val[2];  // = imgHSV.get(y, x)[2];
             
-            int * hsv = new int [3];
-            hsv[0] = H;
-            hsv[1] = S;
-            hsv[2] = V;
-            
-            pixel.push_back(hsv);
-//            NSLog(@"HSV - %d:%d:%d", H, S, V);
+            //            NSLog(@"HSV - %d:%d:%d", H, S, V);
             if (S > 255 / 2 && V > 255 / 2){
                 H_List.push_back(H);
             }
@@ -394,23 +387,44 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
             
         }
     }
-    
-    for (int i = 0; i < H_List.size(), i++){
-        NSLog(@"HVAls - %d",H_List[i]);
+    NSLog(@"HList size  - %d",H_List.size());
+    for (int i = 0; i < H_List.size() / 20; i = i + 20){
+        //        NSLog(@"HVAls - %d",H_List[i]);
     }
     
+    int * H_mode = histog(H_List, 90, 2);
     
+    int * H_range = calc_rangeValue( H_mode, 0.7, 2, 90); // returns the [lower_range_limit, higher_range_limit]
+    NSLog(@"H Range - %d - %d", H_range[0], H_range[1]);
+
+    vector<int>().swap(H_List);
+    H_mode = 0;
+    
+    
+    Global *global = [Global sharedManager];
+    global.minH = H_range[0];
+    global.maxH = H_range[1];
+    
+    int S_range[2];
+    S_range[0] = 256/2;
+    S_range[1] = 250;
+    int V_range[2];
+    V_range[0] = 256/2;
+    V_range[1] = 255;
+    
+    [self setColorSpectrumRange:H_range withS:S_range withV:V_range];
+    imgHSV.release();
 }
 
 
 
 //-(void)processLogoMatch:(cv::Mat) img rect:(cv::Rect) roi point:(cv::Point) matchLoc logo:(cv::Mat) logoImg{
-//    
+//
 //}
 //void processLogoMatch( cv::Mat img, cv::Rect roi, cv::Point matchLoc, cv::Mat logoImg ){
 -(void)processLogoMatch:(cv::Mat) img rect:(cv::Rect) roi point:(cv::Point) matchLoc logo:(cv::Mat) logoImg{
     
-
+    
     // Calculate the left and right corner positions of the bounding box around the logo
     cv::Point logoCorner1(matchLoc.x + roi.x, matchLoc.y+roi.y); /// TODO: WAIT ISN"T ROI.X THE TOP CORNER
     cv::Point logoCorner2(logoCorner1.x + logoImg.cols, logoCorner1.y + logoImg.rows );
@@ -419,13 +433,13 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
     cv::Scalar rectangle_color(0, 255, 0);
     int rectangle_thickness = 10;
     
-
+    
     
     double logoDuration = logoDetectDuration();
     // if the Logo was detected for longer than the predefined Threshold time
     if( logoDuration >= 0 ){
         NSLog(@"LONGER THAN THRESHOLD");
-
+        
         // if the log was detected for longer thn the predefined Threshold time
         // then lets process the frame to learn what color range the ball is
         
@@ -469,7 +483,7 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
                     int H = hsvValue.val[0];  // = imgHSV.get(y,x)[0];
                     int S = hsvValue.val[1];  // = imgHSV.get(y, x)[1];
                     int V = hsvValue.val[2];  // = imgHSV.get(y, x)[2];
-//                    NSLog(@"H - %d  S - %d  V -  %d",H,S,V);
+                    //                    NSLog(@"H - %d  S - %d  V -  %d",H,S,V);
                     // if the Color is within the Bounds of Reasonable color
                     // meaning the color isn't white or yellow or anything
                     if( isBallColor(H, S, V) ){ // Within the possible HSV value for the ball color
@@ -477,12 +491,12 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
                         
                         // H in openCV is weird, you need to wrap it around by 90
                         // e.g.  91 becomes 1, 100 becomes 10  BUT 89 stays 89, 35 stays 35
-//                        if( H >= 90 ){
-//                            H = H-90;
-//                        }
-//                        else{
-//                            H = H+90;
-//                        }
+                        //                        if( H >= 90 ){
+                        //                            H = H-90;
+                        //                        }
+                        //                        else{
+                        //                            H = H+90;
+                        //                        }
                         
                         //Append this Pixel's color value to the Pixel Array
                         int* hsv = new int [3];
@@ -493,9 +507,9 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
                         //*************DJFHDSJFHSDJFHDFJHDS//////
                         // append the H value to the H list array
                         
-//                        if (S > 256 / 2 && V > 256 / 2){
-                            H_List.push_back(H);
-//                        }
+                        //                        if (S > 256 / 2 && V > 256 / 2){
+                        H_List.push_back(H);
+                        //                        }
                     }
                     else{ // if this pixel is not a possible color on the ball (e.g. black, blue, white)
                         rejectedPixels += 1; // increment the rejected pixels count
@@ -505,9 +519,9 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
         } //for every row in a frame
         
         
-//        NSLog(@"Ball Area - %ld",ballArea);
-//        NSLog(@"Rejected Pixels - %ld",rejectedPixels);
-
+        //        NSLog(@"Ball Area - %ld",ballArea);
+        //        NSLog(@"Rejected Pixels - %ld",rejectedPixels);
+        
         imgHSV.release(); // release this Mat, we're not using it anymore
         
         // Define constants
@@ -516,21 +530,21 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
         double kV = 0.15;
         
         NSLog(@"Length =  %ld" , H_List.size() );
-
+        
         
         // Calculate the Histogram for H values
         int * H_mode = histog( H_List, 90, 2 ); // returns histogram array
-       
+        
         for(int i = 0; i < 90; i++){
-//                        NSLog(@"H%d: %d",i,H_mode[i]);
+            //                        NSLog(@"H%d: %d",i,H_mode[i]);
         }
-        return;
+    
         int * H_range = calc_rangeValue( H_mode, kH, 2, 90); // returns the [lower_range_limit, higher_range_limit]
         NSLog(@"H Range - %d - %d", H_range[0], H_range[1]);
         
         
         // Debug output, range for H value is
-//        NSLog(@"");
+        //        NSLog(@"");
         
         //Declare a List Array of integers to store information about the  S and V values int he ball
         //        int S_list[0];
@@ -570,11 +584,10 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
         //        int mmS[] = std::find - peakValue(S_mode); //find the peak value
         global.peakS = mmS[0]*8;//this is the peak S value detected
         NSLog(@"Peak S = %d", global.peakS);
-        NSLog(@"S MODE VALUES = ");
-
+        
         
         for(int i = 0; i < 256/8; i++){
-//            NSLog(@"%d: %d",i*8,S_mode[i]);
+            //            NSLog(@"%d: %d",i*8,S_mode[i]);
         }
         
         
@@ -582,9 +595,9 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
         int* S_range = calc_rangeValue(S_mode, kS , 8, 256/8);
         NSLog(@"S range = %d to %d", S_range[0],S_range[1]);
         
-  //      // NOTE: ERIC I MANUALLY DID THIS, S_RANGE DOESNT WORK. TODO: FIX IT
-  //      S_range[0] = 70;
-  //      S_range[1] = 200;
+        //      // NOTE: ERIC I MANUALLY DID THIS, S_RANGE DOESNT WORK. TODO: FIX IT
+        //      S_range[0] = 70;
+        //      S_range[1] = 200;
         
         
         // Calculate the histogram of the V values
@@ -594,16 +607,16 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
         global.V_limit = calc_rangeValue(V_mode,kV,8 , 256 / 8); // calculate the V range limits
         
         NSLog(@"V range = %d to %d", global.V_limit[0],global.V_limit[1]);
-
+        
         
         NSLog(@"Peak V = %d", mmV[0]*8);
         NSLog(@"V MODE VALUES = ");
         
         
         for(int i = 0; i < 256/8; i++){
-//            NSLog(@"%d: %d",i*8,H_mode[i]);
+            //            NSLog(@"%d: %d",i*8,H_mode[i]);
         }
-
+        
         
         // Arbitrarily set the V value range, brightness range
         int V_range[2];
@@ -612,7 +625,7 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
         
         // set the global color spectrum range
         [self setColorSpectrumRange:H_range withS:S_range withV:V_range];
-//        setColorSpectrumRange( H_range, S_range, V_range );
+        //        setColorSpectrumRange( H_range, S_range, V_range );
         
         // Draw a circle arund where we think the ball is
         cv::circle(img, circleCenter, circleRadius, rectangle_color, rectangle_thickness);
@@ -623,8 +636,8 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
         
         
         // Update the Global state, Logo Detected so nect state should be Ball Tracking
-//        STATE = BALL_TRACKING;
-//        global.STATE = global.BALL_TRACKING;
+        //        STATE = BALL_TRACKING;
+        //        global.STATE = global.BALL_TRACKING;
         
         //DEBUGGING STUFF INCLUDE LATER WHEN THERE'S TIME
         
@@ -644,7 +657,7 @@ static cv::Point findLogoMatch(cv::Mat cropImg, cv::Mat logoImg, int imageBrand)
     
     cv::Mat result;
     result.create(result_rows, result_cols, CV_32FC1);
-
+    
     int match_method = 5;   // define Match Method for Logo Detection
     
     /// Do the Matching and Normalize
@@ -669,24 +682,24 @@ static cv::Point findLogoMatch(cv::Mat cropImg, cv::Mat logoImg, int imageBrand)
     
     result.release();
     
-//    NSLog(@"Max Val = %f",maxVal);
+    //    NSLog(@"Max Val = %f",maxVal);
     if(confidence > 30){
         NSLog(@"DETECTED %@, Confidence = %d", [NSString stringWithCString: brandString[imageBrand].c_str() encoding:[NSString defaultCStringEncoding]] ,confidence);
     }
-//    UIImage *testImage = cvMatToUIImage(logoImg);
+    //    UIImage *testImage = cvMatToUIImage(logoImg);
     
     
     Global *g = [Global sharedManager];
     
     if (confidence > g.CONFIDENCE_THRESHOLD) {
-//        NSLog(@"LOGO %@ DETECTED",[NSString stringWithCString: brandString[imageBrand].c_str() encoding:[NSString defaultCStringEncoding]]);
+        //        NSLog(@"LOGO %@ DETECTED",[NSString stringWithCString: brandString[imageBrand].c_str() encoding:[NSString defaultCStringEncoding]]);
         // Calculate the center point of the matching location
         return matchLoc;
     }
     else {
         return cv::Point(-1,-1);
     }
-
+    
     
 }
 
@@ -743,9 +756,6 @@ double logoDetectDuration(){
     int H0 = H_range[0];
     int H1 = H_range[1];
     
-    H0 = H0 - 90;
-    H1 = H1 - 90;
-    
     if( H0 >= 0 && H1 >=0 ){
         //same range
         global.LowerSpect = new int[8];
@@ -764,83 +774,21 @@ double logoDetectDuration(){
         
         Scalar c = Scalar( H1, S_range[0], V_range[0] );
         Scalar d = Scalar( H1, S_range[1], V_range[1] );
+        
+        global.UpperSpect[0] = c.val[0];
+        global.UpperSpect[1] = c.val[1];
+        global.UpperSpect[2] = c.val[2];
+        global.UpperSpect[3] = c.val[3];
+        global.UpperSpect[4] = d.val[0];
+        global.UpperSpect[5] = d.val[1];
+        global.UpperSpect[6] = d.val[2];
+        global.UpperSpect[7] = d.val[3];
+        
+    }else{
+        assert("BAD ERROR");
+        
+    }
 
-        global.UpperSpect[0] = c.val[0];
-        global.UpperSpect[1] = c.val[1];
-        global.UpperSpect[2] = c.val[2];
-        global.UpperSpect[3] = c.val[3];
-        global.UpperSpect[4] = d.val[0];
-        global.UpperSpect[5] = d.val[1];
-        global.UpperSpect[6] = d.val[2];
-        global.UpperSpect[7] = d.val[3];
-        
-    }
-    else if(H0 <= 0 && H1 >= 0){
-        H0 = H0 + 180;
-        
-        global.LowerSpect = new int[8];
-        global.UpperSpect = new int[8];
-        Scalar a = Scalar(H0,S_range[0], V_range[0]);
-        Scalar b = Scalar(180, S_range[1], V_range[1]);
-
-        global.LowerSpect[0] = a.val[0];
-        global.LowerSpect[1] = a.val[1];
-        global.LowerSpect[2] = a.val[2];
-        global.LowerSpect[3] = a.val[3];
-        global.LowerSpect[4] = b.val[0];
-        global.LowerSpect[5] = b.val[1];
-        global.LowerSpect[6] = b.val[2];
-        global.LowerSpect[7] = b.val[3];
-        
-        Scalar c = Scalar( 0, S_range[0], V_range[0] );
-        Scalar d = Scalar( H1, S_range[1], V_range[1] );
-        
-        global.UpperSpect[0] = c.val[0];
-        global.UpperSpect[1] = c.val[1];
-        global.UpperSpect[2] = c.val[2];
-        global.UpperSpect[3] = c.val[3];
-        global.UpperSpect[4] = d.val[0];
-        global.UpperSpect[5] = d.val[1];
-        global.UpperSpect[6] = d.val[2];
-        global.UpperSpect[7] = d.val[3];
-        
-        // same range, just add 180 to it
-        
-        NSLog(@"Split up to H = %d, %d", H0, H1);
-        // split range up
-    }
-    else if( H0 <= 0 && H1 <= 0 ){
-        H0 = H0 + 180;
-        H1 = H1 + 180;
-        
-        global.LowerSpect = new int[8];
-        global.UpperSpect = new int[8];
-        Scalar a = Scalar(H0, S_range[0], V_range[0]);
-        Scalar b = Scalar(H1, S_range[1], V_range[1]);
-        
-        global.LowerSpect[0] = a.val[0];
-        global.LowerSpect[1] = a.val[1];
-        global.LowerSpect[2] = a.val[2];
-        global.LowerSpect[3] = a.val[3];
-        global.LowerSpect[4] = b.val[0];
-        global.LowerSpect[5] = b.val[1];
-        global.LowerSpect[6] = b.val[2];
-        global.LowerSpect[7] = b.val[3];
-        
-        Scalar c = Scalar( H0, S_range[0], V_range[0] );
-        Scalar d = Scalar( H1, S_range[1], V_range[1] );
-        
-        global.UpperSpect[0] = c.val[0];
-        global.UpperSpect[1] = c.val[1];
-        global.UpperSpect[2] = c.val[2];
-        global.UpperSpect[3] = c.val[3];
-        global.UpperSpect[4] = d.val[0];
-        global.UpperSpect[5] = d.val[1];
-        global.UpperSpect[6] = d.val[2];
-        global.UpperSpect[7] = d.val[3];
-       
-        NSLog(@"Split up to H = %d, %d", H0, H1);
-    }
 }
 
 bool isBallColor( int H, int S, int V  ){
@@ -848,7 +796,7 @@ bool isBallColor( int H, int S, int V  ){
 }
 
 static int* calc_rangeValue( int* hist, double factor, int multiplier, int arrSize ){
-
+    
     int* maxmax = find_peakValue(hist, arrSize);
     int mode_index = maxmax[0];
     int mode_val = maxmax[1];
@@ -901,7 +849,7 @@ static int* histog( std::vector<int> myList, int max_int, int divider ){
     
     for( int i=0; i < myList.size(); i++ ){
         hist[ myList[i] / divider ] += 1;
-//        NSLog(@"hist: %d : %d :  %d", hist[myList[i] / divider], myList[i],i);
+        //        NSLog(@"hist: %d : %d :  %d", hist[myList[i] / divider], myList[i],i);
     }
     return hist;
 }
@@ -946,7 +894,7 @@ bool isInCircle( cv::Point testLoc, cv::Point circleCenter, int circleRadius ){
 }
 -(void)clearTrackingDurations{
     clear_logoDetectDuration();
-    [self.ballTracker clearTrackingDuration];
+    [self.personTracker clearTrackingDuration];
 }
 
 @end
