@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38F4FEAC1CB121F000B53EF6 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F4FEA41CB121EF00B53EF6 /* GradientView.swift */; };
+		38F4FEAD1CB121F000B53EF6 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F4FEA51CB121F000B53EF6 /* TitleViewController.swift */; };
+		38F4FEAE1CB121F000B53EF6 /* TitleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38F4FEA61CB121F000B53EF6 /* TitleViewController.xib */; };
+		38F4FEAF1CB121F000B53EF6 /* WorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F4FEA71CB121F000B53EF6 /* WorkoutsViewController.swift */; };
+		38F4FEB01CB121F000B53EF6 /* WorkoutsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38F4FEA81CB121F000B53EF6 /* WorkoutsViewController.xib */; };
+		38F4FEB11CB121F000B53EF6 /* ReppinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F4FEA91CB121F000B53EF6 /* ReppinViewController.swift */; };
+		38F4FEB21CB121F000B53EF6 /* ReppinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38F4FEAA1CB121F000B53EF6 /* ReppinViewController.xib */; };
+		38F4FEB31CB121F000B53EF6 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F4FEAB1CB121F000B53EF6 /* CounterView.swift */; };
 		BB00816B1CB08F5000BA86C7 /* TestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081601CB08F5000BA86C7 /* TestViewController.mm */; };
 		BB00816C1CB08F5000BA86C7 /* VideoSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081621CB08F5000BA86C7 /* VideoSource.mm */; };
 		BB00816D1CB08F5000BA86C7 /* ImageProcessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081651CB08F5000BA86C7 /* ImageProcessor.mm */; };
@@ -51,6 +59,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38F4FEA41CB121EF00B53EF6 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		38F4FEA51CB121F000B53EF6 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
+		38F4FEA61CB121F000B53EF6 /* TitleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleViewController.xib; sourceTree = "<group>"; };
+		38F4FEA71CB121F000B53EF6 /* WorkoutsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutsViewController.swift; sourceTree = "<group>"; };
+		38F4FEA81CB121F000B53EF6 /* WorkoutsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkoutsViewController.xib; sourceTree = "<group>"; };
+		38F4FEA91CB121F000B53EF6 /* ReppinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReppinViewController.swift; sourceTree = "<group>"; };
+		38F4FEAA1CB121F000B53EF6 /* ReppinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReppinViewController.xib; sourceTree = "<group>"; };
+		38F4FEAB1CB121F000B53EF6 /* CounterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		BB00815E1CB08F4F00BA86C7 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		BB00815F1CB08F5000BA86C7 /* TestViewController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TestViewController.hpp; sourceTree = "<group>"; };
 		BB0081601CB08F5000BA86C7 /* TestViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestViewController.mm; sourceTree = "<group>"; };
@@ -176,6 +192,14 @@
 				BB0081681CB08F5000BA86C7 /* Global.h */,
 				BB0081691CB08F5000BA86C7 /* Global.mm */,
 				BB00816A1CB08F5000BA86C7 /* PrefixHeader.pch */,
+				38F4FEA41CB121EF00B53EF6 /* GradientView.swift */,
+				38F4FEA51CB121F000B53EF6 /* TitleViewController.swift */,
+				38F4FEA61CB121F000B53EF6 /* TitleViewController.xib */,
+				38F4FEA71CB121F000B53EF6 /* WorkoutsViewController.swift */,
+				38F4FEA81CB121F000B53EF6 /* WorkoutsViewController.xib */,
+				38F4FEA91CB121F000B53EF6 /* ReppinViewController.swift */,
+				38F4FEAA1CB121F000B53EF6 /* ReppinViewController.xib */,
+				38F4FEAB1CB121F000B53EF6 /* CounterView.swift */,
 				BBEE638A1CB08F0400AF4FE2 /* Assets.xcassets */,
 				BBEE638C1CB08F0400AF4FE2 /* LaunchScreen.storyboard */,
 				BBEE638F1CB08F0400AF4FE2 /* Info.plist */,
@@ -308,6 +332,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBEE638E1CB08F0400AF4FE2 /* LaunchScreen.storyboard in Resources */,
+				38F4FEB01CB121F000B53EF6 /* WorkoutsViewController.xib in Resources */,
+				38F4FEB21CB121F000B53EF6 /* ReppinViewController.xib in Resources */,
+				38F4FEAE1CB121F000B53EF6 /* TitleViewController.xib in Resources */,
 				BBEE638B1CB08F0400AF4FE2 /* Assets.xcassets in Resources */,
 				BBEE63861CB08F0400AF4FE2 /* Main.storyboard in Resources */,
 			);
@@ -339,9 +366,14 @@
 				BB00816F1CB08F5000BA86C7 /* Global.mm in Sources */,
 				BBEE63831CB08F0400AF4FE2 /* ViewController.swift in Sources */,
 				BBEE63811CB08F0400AF4FE2 /* AppDelegate.swift in Sources */,
+				38F4FEAF1CB121F000B53EF6 /* WorkoutsViewController.swift in Sources */,
 				BB00816D1CB08F5000BA86C7 /* ImageProcessor.mm in Sources */,
 				BBEE63891CB08F0400AF4FE2 /* Get_Rept.xcdatamodeld in Sources */,
+				38F4FEB31CB121F000B53EF6 /* CounterView.swift in Sources */,
 				BB00816E1CB08F5000BA86C7 /* PersonTracking.mm in Sources */,
+				38F4FEAC1CB121F000B53EF6 /* GradientView.swift in Sources */,
+				38F4FEB11CB121F000B53EF6 /* ReppinViewController.swift in Sources */,
+				38F4FEAD1CB121F000B53EF6 /* TitleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,9 +532,12 @@
 					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Isometric.Get-Rept";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -532,9 +567,12 @@
 					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Isometric.Get-Rept";
 				PRODUCT_NAME = "$(TARGET_NAME)";

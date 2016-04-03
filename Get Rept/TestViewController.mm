@@ -59,9 +59,9 @@
     self.firstImage = true;
     
     
-    UIButton* button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+    UIButton* button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [button addTarget:self action: NSSelectorFromString(@"startTracking") forControlEvents:UIControlEventTouchUpInside];
-    [button setBackgroundColor:[UIColor greenColor]];
+    [button setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:button];
     
     // Do any additional setup after loading the view.
@@ -76,6 +76,7 @@
 }
 
 -(void)startTracking{
+    NSLog(@"Start tracking");
     Global * global = [Global sharedManager];
     global.STATE = global.PERSON_TRACKING;
 }
@@ -89,7 +90,7 @@
 
 
 - (void)frameReady:(VideoFrame)frame{
-    //    NSLog(@"Frame");
+//        NSLog(@"Frame");
     
     if (self.firstImage){
         self.firstImage = NO;

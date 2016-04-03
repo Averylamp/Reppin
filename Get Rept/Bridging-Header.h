@@ -10,5 +10,5 @@
 #define Bridging_Header_h
 
 
-
+#import "Global.h"
 #endif /* Bridging_Header_h */
