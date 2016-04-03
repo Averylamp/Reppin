@@ -48,7 +48,7 @@ vector<int> MASTER_track_x;
 vector<int> MASTER_track_y;
 vector<double> MASTER_track_area;
 
-static int currentRep = 0;
+
 static int DRIBBLE_PEAK_THRESHOLD = 125; // was 35
 
 
@@ -138,13 +138,16 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
         
         
         // Save Ball Tracking Data
-        saveTrackingData(rc.x, rc.y, area); // Save the ball position data
-     
-        calcUpDownRate();
         
-        // Display DebugText on Screen
-        DebugText_Ball(mColorMask, area, ballSizedContours,rc.width,rc.height);
         
+        if (global.STATE == global.PERSON_TRACKING){
+            saveTrackingData(rc.x, rc.y, area); // Save the ball position data
+         
+            calcUpDownRate();
+            
+            // Display DebugText on Screen
+            DebugText_Ball(mColorMask, area, ballSizedContours,rc.width,rc.height);
+        }
     }// endif there was a contour detected
  
     
@@ -162,7 +165,7 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
 
 
     // If the Time is Up
-    if (currentRep == global.repsPerSet) {
+    if (global.currentRepCount == global.repsPerSet) {
 #pragma mark - Analytics Function Commented
 //        Analytics();	// Calculate the Analytics
         NSLog(@"ENDED");
@@ -346,7 +349,7 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
             
 
             repRate = 1.0 / avg;
-            currentRep = pks.size();
+            
             NSLog(@"# Peaks = %d", (pks.size()) );
             NSLog(@"Avg Delta Peak = %f", avg);
             NSLog(@"DPS = %f", repRate);

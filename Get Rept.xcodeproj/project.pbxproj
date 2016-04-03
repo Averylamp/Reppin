@@ -554,6 +554,8 @@
 					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -575,6 +577,8 @@
 					"$(PROJECT_DIR)/Get",
 					Rept,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Get",
+					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
 					"$(PROJECT_DIR)/Get",
