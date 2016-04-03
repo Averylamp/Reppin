@@ -104,7 +104,7 @@ static int FRAMES_TO_CALC = 30; // how many frames to calculate dribble rate
     
     
     makeColorMask(mCameraFrameHsv, fullUpperSpect,fullLowerSpect, mColorMask);
-    mCameraFrameHsv.release(); // erase this matrix, we're done with it
+    
     
     // Dilate and Erode the Mask to Isolate the Ball better    
     dilateErodeMask(mColorMask);
@@ -160,7 +160,7 @@ static int FRAMES_TO_CALC = 30; // how many frames to calculate dribble rate
  
     
     // Turn Debug on or Off
-    if (global.DEBUG_TRACKING){
+    if (true){
         mColorMask.copyTo(mCameraFrame);  // useful for seeing the raw filtered data on screen
     }
     
@@ -183,11 +183,12 @@ static int FRAMES_TO_CALC = 30; // how many frames to calculate dribble rate
     // if Tracking Error Detected
     // change the State to Global.ERROR_TRACKING
     // Return the Processed Camera Frame
-    UIImage *returnImage = cvMatToUIImage(mCameraFrame);
-//    UIImage *returnImage = cvMatToUIImage(mCameraFrame);
+    UIImage *returnImage = cvMatToUIImage(mColorMask);
+//    UIImage *returnImage = cvMatToUIImage(mCameraFrameHsv);
     mCameraFrame.release();
     mFilteredFrame.release();
     mColorMask.release();
+    mCameraFrameHsv.release(); // erase this matrix, we're done with it
     return returnImage;
 }
 
