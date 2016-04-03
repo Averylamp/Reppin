@@ -34,6 +34,8 @@
 		BB0081851CB08F7500BA86C7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081791CB08F7400BA86C7 /* CoreVideo.framework */; };
 		BB0081861CB08F7500BA86C7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */; };
 		BB2854621CB0DB6700E277C3 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2854611CB0DB6700E277C3 /* opencv2.framework */; };
+		BB294E841CB16F4C009F6BAB /* EndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB294E831CB16F4C009F6BAB /* EndViewController.swift */; };
+		BB294E861CB16F67009F6BAB /* EndViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB294E851CB16F67009F6BAB /* EndViewController.xib */; };
 		BBEE63811CB08F0400AF4FE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */; };
 		BBEE63831CB08F0400AF4FE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE63821CB08F0400AF4FE2 /* ViewController.swift */; };
 		BBEE63861CB08F0400AF4FE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBEE63841CB08F0400AF4FE2 /* Main.storyboard */; };
@@ -97,6 +99,8 @@
 		BB0081791CB08F7400BA86C7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreVideo.framework; sourceTree = "<group>"; };
 		BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AssetsLibrary.framework; sourceTree = "<group>"; };
 		BB2854611CB0DB6700E277C3 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		BB294E831CB16F4C009F6BAB /* EndViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndViewController.swift; sourceTree = "<group>"; };
+		BB294E851CB16F67009F6BAB /* EndViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EndViewController.xib; sourceTree = "<group>"; };
 		BBEE637D1CB08F0400AF4FE2 /* Get Rept.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Get Rept.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBEE63821CB08F0400AF4FE2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 				38F4FEAB1CB121F000B53EF6 /* CounterView.swift */,
 				383ABB9F1CB14BFD009CFB5C /* QuestionnaireViewController.swift */,
 				383ABBA01CB14BFD009CFB5C /* QuestionnaireViewController.xib */,
+				BB294E831CB16F4C009F6BAB /* EndViewController.swift */,
+				BB294E851CB16F67009F6BAB /* EndViewController.xib */,
 				BBEE638A1CB08F0400AF4FE2 /* Assets.xcassets */,
 				BBEE638C1CB08F0400AF4FE2 /* LaunchScreen.storyboard */,
 				BBEE638F1CB08F0400AF4FE2 /* Info.plist */,
@@ -346,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB294E861CB16F67009F6BAB /* EndViewController.xib in Resources */,
 				383ABB9E1CB13982009CFB5C /* RonduitCapitals-Light.otf in Resources */,
 				BBEE638E1CB08F0400AF4FE2 /* LaunchScreen.storyboard in Resources */,
 				38F4FEB01CB121F000B53EF6 /* WorkoutsViewController.xib in Resources */,
@@ -384,6 +391,7 @@
 				BBEE63831CB08F0400AF4FE2 /* ViewController.swift in Sources */,
 				BBEE63811CB08F0400AF4FE2 /* AppDelegate.swift in Sources */,
 				38F4FEAF1CB121F000B53EF6 /* WorkoutsViewController.swift in Sources */,
+				BB294E841CB16F4C009F6BAB /* EndViewController.swift in Sources */,
 				BB00816D1CB08F5000BA86C7 /* ImageProcessor.mm in Sources */,
 				BBEE63891CB08F0400AF4FE2 /* Get_Rept.xcdatamodeld in Sources */,
 				38F4FEB31CB121F000B53EF6 /* CounterView.swift in Sources */,

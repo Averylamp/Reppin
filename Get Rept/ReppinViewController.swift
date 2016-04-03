@@ -54,14 +54,15 @@ class ReppinViewController: UIViewController {
     
     let startTime = CACurrentMediaTime()
     
-    
+    var setted = false
     func update(){
-        
-        let globalValues = Global.sharedManager() as! Global
-        if cv.reps != Int(globalValues.currentRepCount){
-            cv.reps = Int(globalValues.currentRepCount);
-//            cv.reps = Int(globalValues.currentRepPerSec);  ??DISPLAY RPS
-            reppppin()
+        if setted == false {
+            let globalValues = Global.sharedManager() as! Global
+            if cv.reps != Int(globalValues.currentRepCount){
+                cv.reps = Int(globalValues.currentRepCount);
+    //            cv.reps = Int(globalValues.currentRepPerSec);  ??DISPLAY RPS
+                reppppin()
+            }
         }
     }
 
@@ -72,8 +73,9 @@ class ReppinViewController: UIViewController {
     
     func reppppin() {
         var myUtterance : AVSpeechUtterance
-        if cv.reps % repTarget == 0 {
+        if cv.reps % cv.maxReps == 0  && cv.reps  != 0 {
             myUtterance = AVSpeechUtterance(string: "\(cv.reps). Nice set! Relax for 15 seconds, then touch the screen to start your next set")
+            cv.reps = 0
             settttin()
         } else {
             myUtterance = AVSpeechUtterance(string: "\(cv.reps)")
@@ -87,10 +89,23 @@ class ReppinViewController: UIViewController {
     }
     
     func settttin() {
+        setted = true
         cv.sets += 1
         cv.reps = 0
         cv.setNeedsDisplay()
         cv.setFinished()
+        print("CV SETS \(cv.sets)")
+        
+        if (cv.sets == cv.maxSets) {
+            presentViewController(EndViewController(), animated: true, completion: nil)
+ 
+        }
+        let delay = 3.5 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            self.setted = false
+        }
+
     }
     /*
     // MARK: - Navigation

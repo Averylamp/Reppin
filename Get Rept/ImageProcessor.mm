@@ -632,7 +632,7 @@ static void SearchLogoBrand( cv::Mat cropImg, cv::Mat *logoImg_arr, int* respons
         //        setColorSpectrumRange( H_range, S_range, V_range );
         
         // Draw a circle arund where we think the ball is
-        cv::circle(img, circleCenter, circleRadius, rectangle_color, rectangle_thickness);
+//        cv::circle(img, circleCenter, circleRadius, rectangle_color, rectangle_thickness);
         
         NSLog(@"lowerSpec= %d, %d, %d,  to %d, %d, %d, %d",global.LowerSpect[0],global.LowerSpect[1],global.LowerSpect[2],global.LowerSpect[4],global.LowerSpect[5],global.LowerSpect[6]);
         

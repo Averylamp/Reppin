@@ -120,7 +120,7 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
         double area = cv::contourArea(contours[maxContour_id]);
         cv::Rect rc = cv::boundingRect(contours[maxContour_id]);
 //        cv::rectangle(mCameraFrame, rc.tl(), rc.br(),  cv::Scalar(0, 255, 255));
-        cv::rectangle(mCameraFrame, rc, Scalar(0,0,255),4, 8, 0);
+        cv::rectangle(mCameraFrame, rc, Scalar(0,255,0),2, 8, 0);
 
         // Draw a Circle Around the Ball
 //        DrawBall(mColorMask,rc.x+rc.width/2, rc.y+rc.height/2 );
@@ -147,7 +147,7 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
             calcUpDownRate();
             
             // Display DebugText on Screen
-            DebugText_Ball(mColorMask, area, ballSizedContours,rc.width,rc.height);
+//            DebugText_Ball(mColorMask, area, ballSizedContours,rc.width,rc.height);
         }
     }// endif there was a contour detected
  
