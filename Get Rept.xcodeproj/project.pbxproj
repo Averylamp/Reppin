@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3BAB0ADA1CB0D56D00D660F9 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAB0AD91CB0D56D00D660F9 /* opencv2.framework */; };
 		BB00816B1CB08F5000BA86C7 /* TestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081601CB08F5000BA86C7 /* TestViewController.mm */; };
 		BB00816C1CB08F5000BA86C7 /* VideoSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081621CB08F5000BA86C7 /* VideoSource.mm */; };
 		BB00816D1CB08F5000BA86C7 /* ImageProcessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0081651CB08F5000BA86C7 /* ImageProcessor.mm */; };
@@ -23,8 +22,7 @@
 		BB0081841CB08F7500BA86C7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081781CB08F7400BA86C7 /* QuartzCore.framework */; };
 		BB0081851CB08F7500BA86C7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081791CB08F7400BA86C7 /* CoreVideo.framework */; };
 		BB0081861CB08F7500BA86C7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */; };
-		BB0081871CB08F7500BA86C7 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB00817B1CB08F7400BA86C7 /* opencv2.framework */; };
-		BB28545E1CB0B9CB00E277C3 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB28545D1CB0B9CB00E277C3 /* opencv2.framework */; };
+		BB2854621CB0DB6700E277C3 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2854611CB0DB6700E277C3 /* opencv2.framework */; };
 		BBEE63811CB08F0400AF4FE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */; };
 		BBEE63831CB08F0400AF4FE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE63821CB08F0400AF4FE2 /* ViewController.swift */; };
 		BBEE63861CB08F0400AF4FE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBEE63841CB08F0400AF4FE2 /* Main.storyboard */; };
@@ -53,7 +51,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3BAB0AD91CB0D56D00D660F9 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "Get Rept/opencv2.framework"; sourceTree = "<group>"; };
 		BB00815E1CB08F4F00BA86C7 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		BB00815F1CB08F5000BA86C7 /* TestViewController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TestViewController.hpp; sourceTree = "<group>"; };
 		BB0081601CB08F5000BA86C7 /* TestViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestViewController.mm; sourceTree = "<group>"; };
@@ -77,8 +74,7 @@
 		BB0081781CB08F7400BA86C7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QuartzCore.framework; sourceTree = "<group>"; };
 		BB0081791CB08F7400BA86C7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreVideo.framework; sourceTree = "<group>"; };
 		BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AssetsLibrary.framework; sourceTree = "<group>"; };
-		BB00817B1CB08F7400BA86C7 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
-		BB28545D1CB0B9CB00E277C3 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = "Get Rept/opencv2.framework"; sourceTree = "<group>"; };
+		BB2854611CB0DB6700E277C3 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		BBEE637D1CB08F0400AF4FE2 /* Get Rept.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Get Rept.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBEE63821CB08F0400AF4FE2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,14 +101,12 @@
 				BB00817C1CB08F7400BA86C7 /* CoreGraphics.framework in Frameworks */,
 				BB0081831CB08F7500BA86C7 /* CoreImage.framework in Frameworks */,
 				BB0081811CB08F7500BA86C7 /* GLKit.framework in Frameworks */,
-				3BAB0ADA1CB0D56D00D660F9 /* opencv2.framework in Frameworks */,
-				BB0081871CB08F7500BA86C7 /* opencv2.framework in Frameworks */,
-				BB28545E1CB0B9CB00E277C3 /* opencv2.framework in Frameworks */,
 				BB00817D1CB08F7500BA86C7 /* Foundation.framework in Frameworks */,
 				BB0081821CB08F7500BA86C7 /* CoreMedia.framework in Frameworks */,
 				BB0081861CB08F7500BA86C7 /* AssetsLibrary.framework in Frameworks */,
 				BB0081841CB08F7500BA86C7 /* QuartzCore.framework in Frameworks */,
 				BB0081851CB08F7500BA86C7 /* CoreVideo.framework in Frameworks */,
+				BB2854621CB0DB6700E277C3 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,8 +130,6 @@
 		BBEE63741CB08F0400AF4FE2 = {
 			isa = PBXGroup;
 			children = (
-				3BAB0AD91CB0D56D00D660F9 /* opencv2.framework */,
-				BB28545D1CB0B9CB00E277C3 /* opencv2.framework */,
 				BBEE637F1CB08F0400AF4FE2 /* Get Rept */,
 				BBEE63971CB08F0400AF4FE2 /* Get ReptTests */,
 				BBEE63A21CB08F0400AF4FE2 /* Get ReptUITests */,
@@ -158,6 +150,7 @@
 		BBEE637F1CB08F0400AF4FE2 /* Get Rept */ = {
 			isa = PBXGroup;
 			children = (
+				BB2854611CB0DB6700E277C3 /* opencv2.framework */,
 				BB0081701CB08F7400BA86C7 /* CoreGraphics.framework */,
 				BB0081711CB08F7400BA86C7 /* Foundation.framework */,
 				BB0081731CB08F7400BA86C7 /* AVFoundation.framework */,
@@ -168,7 +161,6 @@
 				BB0081781CB08F7400BA86C7 /* QuartzCore.framework */,
 				BB0081791CB08F7400BA86C7 /* CoreVideo.framework */,
 				BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */,
-				BB00817B1CB08F7400BA86C7 /* opencv2.framework */,
 				BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */,
 				BBEE63821CB08F0400AF4FE2 /* ViewController.swift */,
 				BBEE63841CB08F0400AF4FE2 /* Main.storyboard */,
@@ -279,12 +271,6 @@
 				TargetAttributes = {
 					BBEE637C1CB08F0400AF4FE2 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 9XWYL3K4YT;
-						SystemCapabilities = {
-							com.apple.Push = {
-								enabled = 1;
-							};
-						};
 					};
 					BBEE63931CB08F0400AF4FE2 = {
 						CreatedOnToolsVersion = 7.3;
@@ -498,7 +484,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,9 +494,10 @@
 					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Isometric.Get-Rept";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -525,7 +511,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -536,9 +521,10 @@
 					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Isometric.Get-Rept";
 				PRODUCT_NAME = "$(TARGET_NAME)";

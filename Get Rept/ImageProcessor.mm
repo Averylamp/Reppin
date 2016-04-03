@@ -21,7 +21,44 @@ using namespace cv;
 
 @implementation ImageProcessor
 
+
+//Objects that arent global
+
+static int S_limit[2];
+static int* V_limit;
+
+
+
+//public static final String serverURL = "http://192.168.1.5:8000";
+
+static int INVITED_STATUS=1;
+static int ACTIVE_STATUS=2;
+static int COMPLETED_STATUS=3;
+
+static int TRAINING_SESSION=1;
+static int CHALLENGE_SESSION=2;
+
+static int SPEED_DRIBBLING=1;
+static int MAX_CROSSOVERS=2;
+static int FATIGUE_CHALLENGE=3;
+
+static int FREESTYLE=1;
+static int MAX_DRIBBLE_SPEED=2;
+static int FAST_AND_HIGH=3;
+static int FATIGUE_TEST=4;
+static int CROSSOVER=5;
+static int CROSSOVER_ADVANCED=6;
+
+static int tracking_last_position[2];
+
+static Boolean isDebug= false;
+
+static int S_mean=0;
+
 static Boolean DEBUG_TRACKING=true; // true to show the debug output, black and white
+
+
+//Context appContext; //vd: what's this?
 
 double LOGO_FRAME_THRESHOLD = 1;
 
