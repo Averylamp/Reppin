@@ -183,7 +183,7 @@ static int FRAMES_TO_CALC = 30; // how many frames to calculate dribble rate
     // if Tracking Error Detected
     // change the State to Global.ERROR_TRACKING
     // Return the Processed Camera Frame
-    UIImage *returnImage = cvMatToUIImage(mColorMask);
+    UIImage *returnImage = cvMatToUIImage(mCameraFrame);
 //    UIImage *returnImage = cvMatToUIImage(mCameraFrameHsv);
     mCameraFrame.release();
     mFilteredFrame.release();
@@ -298,42 +298,6 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
     return response;
 }
 
-//
-// int calcFPS() {
-//    if (Global.last_frame == 0 ) {
-//        Global.last_frame = System.currentTimeMillis();
-//        return 0;
-//    }
-//    else {
-//        int fps = (int) (1000/ (System.currentTimeMillis() - Global.last_frame));
-//        Global.last_frame = System.currentTimeMillis();
-//        return fps;
-//        
-//    }
-//}
-///*
-//	private boolean isBallMovement(int x, int y) {
-// Log.d(TAG,
-// "last = " + Integer.toString(lastX - x) + " ; "
-// + Integer.toString(lastY - y));
-// if (Math.abs(lastX - x) < BALL_MOVEMENT_THRESHOLD
-// && Math.abs(lastY - y) < BALL_MOVEMENT_THRESHOLD) { //
-// nomovement_counter++;
-// } else {
-// nomovement_counter = 0;
-// }
-// lastX = x;
-// lastY = y;
-// 
-// if (nomovement_counter > NO_MOVEMENT_TIME_THRESHOLD) {
-// nomovement_counter = 0;
-// return false;
-// } else {
-// return true;
-// }
-//	} // end if isBall Movement
-// */
-//
  void saveTrackingData(int x, int y, double area) {
     double timestamp = CACurrentMediaTime() * 1000; // timestamp in milliseconds
     double pos[] = { timestamp, (double) x, (double) y, area };
@@ -418,130 +382,6 @@ void clearTrackingData() {
 }
 
 
-/*
- void Analytics() {
-    Log.d(TAG, "An: Calculating Analytics");
-    Log.d(TAG,
-          "An: Track X Length = "
-          + Integer.toString(MASTER_track_x.size()));
-    Log.d(TAG,
-          "An: Track Y Length = "
-          + Integer.toString(MASTER_track_y.size()));
-    
-    // Calculate Dribble Rate
-    List<Integer> pks = peakdetect(toArray(MASTER_track_y),
-                                   DRIBBLE_PEAK_THRESHOLD);
-    
-    List<Double> crossover_t = new ArrayList<Double>();
-    List<Integer> crossover_y = new ArrayList<Integer>();
-    List<Integer> crossover_width = new ArrayList<Integer>();
-    
-    double crossover_sum = 0;
-    double crossover_width_sum = 0;
-    maxDribbleRate = 0;
-    numCrossovers = 0;
-    crossoverWidth = 0;
-    totalDribbles = 0;
-    
-    if (pks.size() >= 2) {
-        double[] temp = new double[pks.size()];
-        double dribble_sum = 0;
-        totalDribbles = pks.size();
-        
-        for (int i = 1; i < pks.size(); i++) {
-            double delt = (MASTER_track_t.get(pks.get(i)) - MASTER_track_t
-                           .get(pks.get(i - 1))) / 1000;
-            temp[i] = delt;
-            
-           // Find maximum dribble rate
-            if (1 / delt > maxDribbleRate && 1 / delt < 9) { // sanity check, not over 9dps
-                maxDribbleRate = 1 / delt;
-            }
-
-            dribble_sum = dribble_sum + temp[i];
-            int delx = Math.abs((MASTER_track_x.get(pks.get(i)) - MASTER_track_x.get(pks.get(i - 1))));
-            Log.d(TAG, "delx = " + Integer.toString(delx));
-            
-            if (Math.abs(delx) >= CROSSOVER_THRESHOLD) {
-                crossover_t.add(MASTER_track_t.get(pks.get(i)));
-                crossover_y.add(MASTER_track_y.get(pks.get(i)));
-                crossover_width.add(delx);
-                crossover_width_sum = crossover_width_sum + delx;
-                crossover_sum = crossover_sum + delt;
-            }
-        }
-        
-        // Calculate Dribble Rate //
-        double avg = dribble_sum / (pks.size() - 1);
-        dribbleRate = 1.0 / avg;
-        Log.d(TAG,
-              "An: Drib yy = " + Arrays.toString(toArray(MASTER_track_y)));
-        Log.d(TAG, "An: Drib pks = " + Arrays.toString(toArray(pks)));
-        Log.d(TAG, "An: Drib delta= " + Arrays.toString(temp));
-        Log.d(TAG, "An: Drib Avg = " + Double.toString(dribbleRate));
-        
-        // Crossover Statistics //
-        numCrossovers = crossover_t.size();
-        Log.d(TAG,
-              "An: Num Crossovers = "
-              + Integer.toString(crossover_t.size()));
-        crossoverWidth = Math.abs(crossover_width_sum
-                                  / crossover_width.size() / 75); // TODO: should use something else relative
-        if (crossover_width.size() == 0) {
-            crossoverWidth = 0;
-        }
-        Log.d(TAG,
-              "An: Num Crossovers = "
-              + Double.toString(crossover_t.size()));
-        
-        // Crossover Location and Height Accuracy //
-        locationAccuracy = (int) (100 * (1 - std_IntegerArr(MASTER_track_x)
-                                         / mean_IntegerArr(MASTER_track_x)));
-        heightAccuracy = (int) (100 * (1 - std_IntegerArr(MASTER_track_y)
-                                       / mean_IntegerArr(MASTER_track_y)));
-        
-        Log.d(TAG, "An: Loc Accuracy= " + Double.toString(locationAccuracy));
-        Log.d(TAG,
-              "An: Height Accuracy = " + Double.toString(heightAccuracy));
-        
-    }
-    
-    clearTrackingData(); // Clear the data
-}
-*/
-
-
-//
-// void writeLogFile() {
-//    String filename = new SimpleDateFormat("MM_dd-HH_mm_ss-yyyy")
-//				.format(new Date());
-//    try {
-//        File file = new File("/mnt/sdcard/ball_logs/", filename + ".txt");
-//        
-//        FileOutputStream outputStream = new FileOutputStream(file);
-//        
-//        for (int i = 0; i < MASTER_track_t.size(); i++) {
-//            String strT = String.format("%.0f", MASTER_track_t.get(i));
-//            String strX = Integer.toString(MASTER_track_x.get(i));
-//            String strY = Integer.toString(MASTER_track_y.get(i));
-//            String strArea = Double.toString(MASTER_track_area.get(i));
-//            
-//            String out = strT + "," + strX + "," + strY + "," + strArea
-//            + "\n";
-//            outputStream.write(out.getBytes());
-//            
-//        }
-//        
-//        outputStream.close();
-//        // display file saved message
-//        // Toast.makeText( getBaseContext(), "File saved successfully!",
-//        // Toast.LENGTH_SHORT).show();
-//        
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//    }
-//    
-//}
 
 void makeColorMask(cv::Mat mCameraFrameHsv,  cv::Scalar* UpperSpect, cv::Scalar* LowerSpect, cv::Mat mColorMask) {
     // Create a mask for the colors of interest, into mColorMask
@@ -571,27 +411,6 @@ void applyMask(cv::Mat mCameraFrame, cv::Mat mColorMask, cv::Mat mFilteredFrame)
 
     mCameraFrame.copyTo(mFilteredFrame, mColorMask); // show filtered image
 }
-
-
-//
-// static double std_IntegerArr(List<Integer> data) {
-//    double mean = mean_IntegerArr(data);
-//    double sum = 0;
-//    for (int i = 0; i < data.size(); i++) {
-//        double temp = data.get(i);
-//        sum += (mean - temp) * (mean - temp);
-//    }
-//    return Math.sqrt(sum / data.size());
-//}
-//
-// static double mean_IntegerArr(List<Integer> data) {
-//    double sum = 0;
-//    for (int i = 0; i < data.size(); i++) {
-//        sum += data.get(i);
-//    }
-//    return sum / data.size();
-//}
-//
 
 
  static std::vector<int> peakdetect(std::vector<int> v, int delta) {
@@ -633,50 +452,6 @@ void applyMask(cv::Mat mCameraFrame, cv::Mat mColorMask, cv::Mat mFilteredFrame)
     return peaks;
 }
 
-
-//
-// void Calc_DribbleRate() {
-//    int PEAKS_OFFSET = 8;
-//    int PEAK_DELTA = 10;
-//    
-//    List<Integer> peaks = peakdetect(toArray(track_y), PEAK_DELTA);
-//    int total_peaks = peaks.size();
-//    
-//    double[] t_drib = new double[total_peaks];
-//    int[] x_drib = new int[total_peaks];
-//    int[] y_drib = new int[total_peaks];
-//    
-//    int min = 0 + PEAKS_OFFSET;
-//    int max = total_peaks - PEAKS_OFFSET;
-//    
-//    for (int i = min; i < max; i++) {
-//        int index = peaks.get(i); // this is index of every dribble
-//        t_drib[i] = track_t.get(index);// t[index];
-//        x_drib[i] = track_x.get(index);// x[index];
-//        y_drib[i] = track_y.get(index);// y[index];
-//        
-//    }
-//    
-//    double sum = 0;
-//    int count = 0;
-//    for (int i = min + 1; i < max - 1; i++) {
-//        sum = sum + (t_drib[i] - t_drib[i - 1]);
-//        count++;
-//    }
-//    double rate = 1 / (sum / count);
-//    
-//    Log.d(TAG, "Dribble Rate = " + Double.toString(rate));
-//}
-//
-//int[] toArray(List<Integer> list) {
-//    int[] ret = new int[list.size()];
-//    int i = 0;
-//    for (Iterator<Integer> it = list.iterator(); it.hasNext(); ret[i++] = it
-//         .next())
-//        ;
-//    return ret;
-//}
-//
  void clear_TrackingDuration() {
     first_timestamp = -1;
 }
