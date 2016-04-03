@@ -113,10 +113,9 @@ class CounterView: UIView {
         startbtn = UIButton(frame: CGRect(x: 60, y: 60, width: 80, height: 80))
         startbtn.layer.borderWidth = 1
         startbtn.layer.borderColor = UIColor.whiteColor().CGColor
-        startbtn.layer.cornerRadius = 40
-        startbtn.titleLabel?.text = "START"
-        
-        startbtn.titleLabel?.font = UIFont(name: "RonduitCapitals-Light", size: 16)
+        startbtn.layer.cornerRadius = 10
+        startbtn.setTitle("START", forState: .Normal)
+        startbtn.titleLabel?.font = UIFont(name: "RonduitCapitals-Light", size: 14)
         startbtn.titleLabel?.textColor = UIColor.whiteColor()
         startbtn.titleLabel?.textAlignment = .Center
         startbtn.addTarget(self, action: #selector(CounterView.startPressed), forControlEvents: UIControlEvents.TouchUpInside)
