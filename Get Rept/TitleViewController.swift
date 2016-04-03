@@ -53,7 +53,7 @@ class TitleViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginpressed(sender: AnyObject) {
-        presentViewController(WorkoutsViewController(), animated: true, completion: nil)
+        presentViewController(QuestionnaireViewController(), animated: true, completion: nil)
     }
 
     @IBAction func signuppressed(sender: AnyObject) {
