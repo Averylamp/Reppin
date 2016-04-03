@@ -10,14 +10,12 @@ import UIKit
 import AVFoundation
 
 class ReppinViewController: UIViewController {
+    var setTarget: Int = 3
+    var repTarget: Int = 10
     
     @IBOutlet var cv: CounterView!
     let gv = GradientView()
     let tv = UIView()
-    var currentSets = 0
-    var currentReps = 0
-    var numSets = 5
-    var numReps = 10
     let synth = AVSpeechSynthesizer()
     
     override func viewWillLayoutSubviews() {
@@ -29,11 +27,11 @@ class ReppinViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        let repbtn = UIButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: 100, height: 100)))
+        let repbtn = UIButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: 100, height: 800)))
         self.view.addSubview(repbtn)
         repbtn.addTarget(self, action: #selector(ReppinViewController.reppppin), forControlEvents: UIControlEvents.TouchUpInside)
-        cv.maxReps = 10
-        cv.maxSets = 5
+        cv.maxReps = repTarget
+        cv.maxSets = setTarget
         cv.setNeedsDisplay()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -53,14 +51,13 @@ class ReppinViewController: UIViewController {
     }
     
     func reppppin() {
-        currentReps += 1
         cv.reps += 1
         var myUtterance : AVSpeechUtterance
-        if currentReps % numReps == 0 {
-            myUtterance = AVSpeechUtterance(string: "\(currentReps). Nice set! Relax for 15 seconds, then touch the screen to start your next set")
+        if cv.reps % repTarget == 0 {
+            myUtterance = AVSpeechUtterance(string: "\(cv.reps). Nice set! Relax for 15 seconds, then touch the screen to start your next set")
             settttin()
         } else {
-            myUtterance = AVSpeechUtterance(string: "\(currentReps)")
+            myUtterance = AVSpeechUtterance(string: "\(cv.reps)")
         }
         myUtterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
         myUtterance.rate = 0.5
@@ -70,7 +67,6 @@ class ReppinViewController: UIViewController {
     }
     
     func settttin() {
-        currentSets += 1
         cv.sets += 1
         cv.reps = 0
         cv.setNeedsDisplay()
