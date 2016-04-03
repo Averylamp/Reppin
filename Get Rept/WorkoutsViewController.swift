@@ -52,11 +52,11 @@ class WorkoutsViewController: UIViewController, UITableViewDelegate, UITableView
         lbl2.text = "\(workoutSets[row]) sets, \(workoutReps[row]) reps"
         lbl2.font = UIFont(name: "RonduitCapitals-Light", size: 10)
         lbl2.textAlignment = .Right
-        lbl2.textColor = UIColor(white: 1, alpha: 0.5)
+        lbl2.textColor = UIColor(white: 1, alpha: 0.8)
         cell.addSubview(lbl2)
         
         let bs = UIView(frame: CGRect(x: 20, y: 59, width: self.view.frame.width-40, height: 1))
-        bs.backgroundColor = UIColor(white: 1, alpha: 0.3)
+        bs.backgroundColor = UIColor(white: 1, alpha: 0.6)
         bs.clipsToBounds = true
         cell.addSubview(bs)
         
