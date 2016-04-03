@@ -190,6 +190,9 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
         case 8:
             resultImage = [self findPerson:image];
             break;
+        case 9:
+            resultImage = [self.personTracker Track:image];
+            break;
         default:
             //            notifyHandler "Error Lighting"
             break;

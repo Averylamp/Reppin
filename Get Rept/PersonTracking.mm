@@ -48,24 +48,9 @@ vector<int> MASTER_track_x;
 vector<int> MASTER_track_y;
 vector<double> MASTER_track_area;
 
-//List<Double> track_t = new ArrayList<Double>();
-//List<Integer> track_x = new ArrayList<Integer>();
-//List<Integer> track_y = new ArrayList<Integer>();
-//List<Double> track_area = new ArrayList<Double>();
-//
-//List<Double> MASTER_track_t = new ArrayList<Double>();
-//List<Integer> MASTER_track_x = new ArrayList<Integer>();
-//List<Integer> MASTER_track_y = new ArrayList<Integer>();
-//List<Double> MASTER_track_area = new ArrayList<Double>();
-
-static int BALL_MOVEMENT_THRESHOLD = 20; // what Y axis change is mvement
-static int NO_MOVEMENT_TIME_THRESHOLD = 15; // how many frames for no motion
-
+static int currentRep = 0;
 static int DRIBBLE_PEAK_THRESHOLD = 125; // was 35
-static int CROSSOVER_THRESHOLD = 85;
 
-static int BALL_MIN_RADIUS = 20;
-static int BALL_MAX_RADIUS = 90;
 
 
 static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
@@ -177,11 +162,14 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
 
 
     // If the Time is Up
-    if (TrackingDuration() >= global.TRACKING_TIME_DURATION) {
+    if (currentRep == global.repsPerSet) {
 #pragma mark - Analytics Function Commented
 //        Analytics();	// Calculate the Analytics
         NSLog(@"ENDED");
-        global.STATE = global.ANALYTICS;
+        clear_TrackingDuration();
+        clearTrackingData();
+        global.STATE = global.WAIT_FOR_START;
+        
     }
   
     
@@ -358,7 +346,7 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
             
 
             repRate = 1.0 / avg;
-            
+            currentRep = pks.size();
             NSLog(@"# Peaks = %d", (pks.size()) );
             NSLog(@"Avg Delta Peak = %f", avg);
             NSLog(@"DPS = %f", repRate);

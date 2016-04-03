@@ -18,11 +18,13 @@
 @property int ERROR_LIGHTING;
 @property int ERROR_BLOBS;
 @property int DETECT_PERSON;
-@property int TRACK_PERSON;
+@property int WAIT_FOR_START;
 
 @property int currentRepCount;
 @property int currentRepPerSec;
 @property int STATE;
+
+@property int repsPerSet;
 
 @property int* LowerSpect;
 @property int* UpperSpect;

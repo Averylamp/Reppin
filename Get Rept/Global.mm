@@ -33,11 +33,12 @@
         self.ERROR_LIGHTING=6;
         self.ERROR_BLOBS=7;
         self.DETECT_PERSON=8;
-        self.TRACK_PERSON = 9;
+        self.WAIT_FOR_START = 9;
         
         
         self.currentRepCount = 0;
         self.currentRepPerSec = 0;
+        self.repsPerSet = 10;
         
         self.minH = 0;
         self.maxH = 0;

@@ -49,6 +49,8 @@ class ReppinViewController: UIViewController {
         let displayLink = CADisplayLink(target: self, selector: #selector(ReppinViewController.update))
         displayLink.frameInterval = 1
         displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+        let global = Global.sharedManager() as! Global
+        global.repsPerSet = Int32(numReps)
         
     }
     
