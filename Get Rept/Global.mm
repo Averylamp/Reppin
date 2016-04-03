@@ -36,6 +36,9 @@
         self.TRACK_PERSON = 9;
         
         
+        self.currentRepCount = 0;
+        self.currentRepPerSec = 0;
+        
         self.minH = 0;
         self.maxH = 0;
         

@@ -20,6 +20,8 @@
 @property int DETECT_PERSON;
 @property int TRACK_PERSON;
 
+@property int currentRepCount;
+@property int currentRepPerSec;
 @property int STATE;
 
 @property int* LowerSpect;
