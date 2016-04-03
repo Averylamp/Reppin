@@ -28,7 +28,7 @@ int minBallArea = 900;
 
 int nomovement_counter = 0;
 
-static double dribbleRate = 0;
+static double repRate = 0;
 static String timeLeft = "";
 
 static double first_timestamp = 0;
@@ -357,14 +357,16 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
             }
             
 
-            dribbleRate = 1.0 / avg;
+            repRate = 1.0 / avg;
             
             NSLog(@"# Peaks = %d", (pks.size()) );
             NSLog(@"Avg Delta Peak = %f", avg);
-            NSLog(@"DPS = %f", dribbleRate);
+            NSLog(@"DPS = %f", repRate);
             NSLog(@"Length Before = %ld", track_x.size() );
 
-            
+            Global *global = [Global sharedManager];
+            global.currentRepCount = pks.size();
+            global.currentRepPerSec = repRate;
             int lastPeak = pks.at(pks.size()-1);
             
             // pop everything in List form 0 to lastPeak

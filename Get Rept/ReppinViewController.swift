@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 
+
 class ReppinViewController: UIViewController {
     var setTarget: Int = 3
     var repTarget: Int = 10
@@ -43,6 +44,23 @@ class ReppinViewController: UIViewController {
 //        tv.frame = self.view.frame;
 //        self.view.addSubview(testVC.view)
         
+        let displayLink = CADisplayLink(target: self, selector: #selector(ReppinViewController.update))
+        displayLink.frameInterval = 1
+        displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+        
+    }
+    
+    let startTime = CACurrentMediaTime()
+    
+    
+    func update(){
+        
+        let globalValues = Global.sharedManager() as! Global
+        if cv.reps != Int(globalValues.currentRepCount){
+            cv.reps = Int(globalValues.currentRepCount);
+            cv.reps = Int(globalValues.currentRepPerSec);
+            reppppin()
+        }
     }
 
     override func didReceiveMemoryWarning() {
