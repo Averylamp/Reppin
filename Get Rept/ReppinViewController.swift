@@ -79,7 +79,7 @@ class ReppinViewController: UIViewController {
             myUtterance = AVSpeechUtterance(string: "\(cv.reps)")
         }
         myUtterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-        myUtterance.rate = 0.4
+        myUtterance.rate = 0.5
         synth.speakUtterance(myUtterance)
         
         cv.setNeedsDisplay()

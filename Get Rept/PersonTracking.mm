@@ -48,6 +48,7 @@ vector<int> MASTER_track_x;
 vector<int> MASTER_track_y;
 vector<double> MASTER_track_area;
 
+std::vector<int> repData;
 
 static int DRIBBLE_PEAK_THRESHOLD = 125; // was 35
 
@@ -169,6 +170,15 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
 #pragma mark - Analytics Function Commented
 //        Analytics();	// Calculate the Analytics
         NSLog(@"ENDED");
+        NSMutableArray * rawRepData = [[NSMutableArray alloc]init];
+        for (int i = 0; i < repData.size(); i++){
+            NSNumber* frame = [NSNumber numberWithInt: track_y.at(i)];
+            NSNumber* time = [NSNumber numberWithDouble:track_t.at(repData.at(i))];
+            NSArray *data = [NSArray arrayWithObjects: frame, time, nil ];
+            [rawRepData addObject: data];
+            
+        }
+        
         clear_TrackingDuration();
         clearTrackingData();
         global.STATE = global.WAIT_FOR_START;
@@ -337,6 +347,7 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
             double* temp = new double[pks.size()];
             double sum = 0;
             double avg = 0;
+            repData = pks;
 
             if (pks.size() >= 4){
                 for (int i = pks.size() - 3; i < pks.size(); i++) {

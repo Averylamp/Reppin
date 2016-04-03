@@ -307,7 +307,7 @@
 						DevelopmentTeam = 9XWYL3K4YT;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -573,7 +573,7 @@
 				INFOPLIST_FILE = "Get Rept/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Isometric.Get-Rept";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Isometric.Reppin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Get Rept/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -600,7 +600,7 @@
 				INFOPLIST_FILE = "Get Rept/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Isometric.Get-Rept";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Isometric.Reppin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Get Rept/Bridging-Header.h";
 			};

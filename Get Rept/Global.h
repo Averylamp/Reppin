@@ -99,7 +99,6 @@
 @property int CROSSOVER;
 @property int CROSSOVER_ADVANCED;
 
-
 @property int* tracking_last_position;
 
 @property BOOL isDebug;

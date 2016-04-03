@@ -23,13 +23,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "weightliftingAppIcon@2x.png",
+      "filename" : "weightlifting-120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "weightliftingAppIcon@3x.png",
+      "filename" : "weightlifting-180.png",
       "scale" : "3x"
     }
   ],
