@@ -96,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB2854621CB0DB6700E277C3 /* opencv2.framework in Frameworks */,
 				BB0081801CB08F7500BA86C7 /* OpenGLES.framework in Frameworks */,
 				BB00817F1CB08F7500BA86C7 /* AVFoundation.framework in Frameworks */,
 				BB00817C1CB08F7400BA86C7 /* CoreGraphics.framework in Frameworks */,
@@ -106,7 +107,6 @@
 				BB0081861CB08F7500BA86C7 /* AssetsLibrary.framework in Frameworks */,
 				BB0081841CB08F7500BA86C7 /* QuartzCore.framework in Frameworks */,
 				BB0081851CB08F7500BA86C7 /* CoreVideo.framework in Frameworks */,
-				BB2854621CB0DB6700E277C3 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,8 +496,11 @@
 					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Isometric.Get-Rept";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -523,8 +526,11 @@
 					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Isometric.Get-Rept";
 				PRODUCT_NAME = "$(TARGET_NAME)";
