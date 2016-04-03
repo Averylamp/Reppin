@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		383ABB9E1CB13982009CFB5C /* RonduitCapitals-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 383ABB9D1CB13973009CFB5C /* RonduitCapitals-Light.otf */; };
 		38F4FEAC1CB121F000B53EF6 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F4FEA41CB121EF00B53EF6 /* GradientView.swift */; };
 		38F4FEAD1CB121F000B53EF6 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F4FEA51CB121F000B53EF6 /* TitleViewController.swift */; };
 		38F4FEAE1CB121F000B53EF6 /* TitleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38F4FEA61CB121F000B53EF6 /* TitleViewController.xib */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		383ABB9D1CB13973009CFB5C /* RonduitCapitals-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RonduitCapitals-Light.otf"; sourceTree = "<group>"; };
 		38F4FEA41CB121EF00B53EF6 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		38F4FEA51CB121F000B53EF6 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		38F4FEA61CB121F000B53EF6 /* TitleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleViewController.xib; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				38F4FEA71CB121F000B53EF6 /* WorkoutsViewController.swift */,
 				38F4FEA81CB121F000B53EF6 /* WorkoutsViewController.xib */,
 				38F4FEA91CB121F000B53EF6 /* ReppinViewController.swift */,
+				383ABB9D1CB13973009CFB5C /* RonduitCapitals-Light.otf */,
 				38F4FEAA1CB121F000B53EF6 /* ReppinViewController.xib */,
 				38F4FEAB1CB121F000B53EF6 /* CounterView.swift */,
 				BBEE638A1CB08F0400AF4FE2 /* Assets.xcassets */,
@@ -331,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				383ABB9E1CB13982009CFB5C /* RonduitCapitals-Light.otf in Resources */,
 				BBEE638E1CB08F0400AF4FE2 /* LaunchScreen.storyboard in Resources */,
 				38F4FEB01CB121F000B53EF6 /* WorkoutsViewController.xib in Resources */,
 				38F4FEB21CB121F000B53EF6 /* ReppinViewController.xib in Resources */,
@@ -540,6 +544,8 @@
 					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -561,6 +567,8 @@
 					"$(PROJECT_DIR)/Get",
 					Rept,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Get",
+					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
 					"$(PROJECT_DIR)/Get",

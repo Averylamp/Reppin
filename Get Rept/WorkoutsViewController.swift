@@ -12,6 +12,9 @@ class WorkoutsViewController: UIViewController, UITableViewDelegate, UITableView
 
     let wtv = UITableView()
     let gv = GradientView()
+    let workoutTitles = ["BABY", "MEDIOCRE", "TOUGH", "HARDCORE", "ENDURANCE"]
+    let workoutSets = [2, 3, 3, 4, 1]
+    let workoutReps = [5, 10, 15, 20, 60]
     
     override func viewWillLayoutSubviews() {
         super.viewDidLoad()
@@ -36,18 +39,18 @@ class WorkoutsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .Default, reuseIdentifier: "cell")
         cell.backgroundColor = UIColor.clearColor()
-        
+        let row = indexPath.row
         
         let lbl = UILabel(frame: CGRect(x: 40, y: 2, width: self.view.frame.width-80, height: 58))
-        lbl.text = "PUSHUPS"
+        lbl.text = workoutTitles[row]
         lbl.font = UIFont(name: "RonduitCapitals-Light", size: 14)
         lbl.textAlignment = .Left
         lbl.textColor = UIColor.whiteColor()
         cell.addSubview(lbl)
         
         let lbl2 = UILabel(frame: CGRect(x: 40, y: 2, width: self.view.frame.width-80, height: 58))
-        lbl2.text = "\((indexPath.row+1)*4-2) REPS, \(indexPath.row*2+2) SETS"
-        lbl2.font = UIFont(name: "RonduitCapitals-Light", size: 14)
+        lbl2.text = "\(workoutSets[row]) sets, \(workoutReps[row]) reps"
+        lbl2.font = UIFont(name: "RonduitCapitals-Light", size: 10)
         lbl2.textAlignment = .Right
         lbl2.textColor = UIColor(white: 1, alpha: 0.5)
         cell.addSubview(lbl2)
@@ -67,7 +70,7 @@ class WorkoutsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -75,7 +78,10 @@ class WorkoutsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        presentViewController(ReppinViewController(), animated: true, completion: nil)
+        let vc = ReppinViewController()
+        vc.repTarget = workoutReps[indexPath.row]
+        vc.setTarget = workoutSets[indexPath.row]
+        presentViewController(vc, animated: true, completion: nil)
     }
     
     /*

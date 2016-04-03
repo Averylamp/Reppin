@@ -165,6 +165,8 @@ class CounterView: UIView {
     }
     
     func startPressed() {
+        let global = Global.sharedManager() as! Global
+        global.STATE = global.PERSON_TRACKING
         setLabel.alpha = 1
         setSubLabel.alpha = 1
         counterLabel.alpha = 1

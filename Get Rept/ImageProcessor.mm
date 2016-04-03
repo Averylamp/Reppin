@@ -191,6 +191,7 @@ static void cvUIImageToMat(const UIImage* image, cv::Mat& m) {
             resultImage = [self findPerson:image];
             break;
         case 9:
+            global.currentRepCount = 0;
             resultImage = [self.personTracker Track:image];
             break;
         default:

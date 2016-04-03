@@ -30,7 +30,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mpS-gc-0pW">
-                    <rect key="frame" x="40" y="400" width="520" height="60"/>
+                    <rect key="frame" x="40" y="420" width="520" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="b0e-d3-Wun"/>
                     </constraints>
@@ -55,8 +55,8 @@
                         <action selector="signuppressed:" destination="-1" eventType="touchUpInside" id="vDP-ot-h5q"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="21X-5E-bwr">
-                    <rect key="frame" x="40" y="280" width="520" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="USER" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="21X-5E-bwr">
+                    <rect key="frame" x="40" y="292" width="520" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="wO7-N2-vJI"/>
                     </constraints>
@@ -64,8 +64,8 @@
                     <fontDescription key="fontDescription" name="RonduitCapitals-Light" family="Ronduit Capitals" pointSize="24"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JdV-Ps-0hK">
-                    <rect key="frame" x="40" y="350" width="520" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PASS" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JdV-Ps-0hK">
+                    <rect key="frame" x="40" y="346" width="520" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="3hM-dQ-sNR"/>
                     </constraints>
@@ -89,7 +89,7 @@
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.010142457061272127" green="0.17716346153846152" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="mpS-gc-0pW" secondAttribute="trailing" constant="40" id="1Af-Zt-u0s"/>
                 <constraint firstItem="JdV-Ps-0hK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3CY-5x-TpO"/>
@@ -98,21 +98,21 @@
                 <constraint firstAttribute="bottom" secondItem="TsZ-DS-bbp" secondAttribute="bottom" constant="40" id="Emi-0v-tgh"/>
                 <constraint firstItem="21X-5E-bwr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="INN-RO-BuE"/>
                 <constraint firstItem="TsZ-DS-bbp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JKj-2j-Kef"/>
+                <constraint firstItem="mpS-gc-0pW" firstAttribute="top" secondItem="JdV-Ps-0hK" secondAttribute="bottom" constant="44" id="JcL-9T-N4B"/>
                 <constraint firstItem="on1-Ev-Tzf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="LpV-fZ-Nis"/>
                 <constraint firstAttribute="trailing" secondItem="JdV-Ps-0hK" secondAttribute="trailing" constant="40" id="Rdd-Lf-0cW"/>
                 <constraint firstItem="mpS-gc-0pW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="bB9-1z-MBR"/>
                 <constraint firstItem="OCd-x6-PH4" firstAttribute="leading" secondItem="on1-Ev-Tzf" secondAttribute="leading" id="bZw-y6-OEX"/>
                 <constraint firstItem="on1-Ev-Tzf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dhG-Ly-ENC"/>
-                <constraint firstItem="JdV-Ps-0hK" firstAttribute="top" secondItem="21X-5E-bwr" secondAttribute="bottom" constant="40" id="jGg-0B-S5v"/>
+                <constraint firstItem="JdV-Ps-0hK" firstAttribute="top" secondItem="21X-5E-bwr" secondAttribute="bottom" constant="24" id="jGg-0B-S5v"/>
                 <constraint firstAttribute="trailing" secondItem="21X-5E-bwr" secondAttribute="trailing" constant="40" id="l6O-2t-1Gg"/>
                 <constraint firstItem="OCd-x6-PH4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="mjX-I8-N5T"/>
                 <constraint firstItem="JdV-Ps-0hK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="nia-ox-Xoz"/>
                 <constraint firstItem="21X-5E-bwr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="p6G-Eg-ZHQ"/>
                 <constraint firstAttribute="trailing" secondItem="TsZ-DS-bbp" secondAttribute="trailing" constant="40" id="pup-2V-gz0"/>
-                <constraint firstItem="TsZ-DS-bbp" firstAttribute="top" secondItem="mpS-gc-0pW" secondAttribute="bottom" constant="40" id="v0v-73-2cD"/>
+                <constraint firstItem="TsZ-DS-bbp" firstAttribute="top" secondItem="mpS-gc-0pW" secondAttribute="bottom" constant="20" id="v0v-73-2cD"/>
                 <constraint firstAttribute="trailing" secondItem="on1-Ev-Tzf" secondAttribute="trailing" id="v5d-Vf-ylw"/>
                 <constraint firstItem="OCd-x6-PH4" firstAttribute="centerX" secondItem="on1-Ev-Tzf" secondAttribute="centerX" id="vrU-OS-9pC"/>
-                <constraint firstItem="21X-5E-bwr" firstAttribute="top" secondItem="on1-Ev-Tzf" secondAttribute="bottom" constant="40" id="xTu-RH-yhv"/>
             </constraints>
             <point key="canvasLocation" x="141" y="273"/>
         </view>

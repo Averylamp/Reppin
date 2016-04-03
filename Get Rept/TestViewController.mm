@@ -78,7 +78,7 @@
 -(void)startTracking{
     NSLog(@"Start tracking");
     Global * global = [Global sharedManager];
-    global.STATE = global.PERSON_TRACKING;
+    global.STATE = global.WAIT_FOR_START;
 }
 
 

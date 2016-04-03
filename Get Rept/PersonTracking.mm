@@ -460,7 +460,6 @@ void applyMask(cv::Mat mCameraFrame, cv::Mat mColorMask, cv::Mat mFilteredFrame)
      if (first_timestamp > 0) {
         return (int) ((timestamp - first_timestamp));
     } else {
-        NSLog(@"STARTED");
         first_timestamp = timestamp;
         return 0;
     }
