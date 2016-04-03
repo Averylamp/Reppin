@@ -60,6 +60,7 @@ class ReppinViewController: UIViewController {
         let globalValues = Global.sharedManager() as! Global
         if currentReps != Int(globalValues.currentRepCount){
             currentReps = Int(globalValues.currentRepCount);
+            print("Current Reps - \(currentReps)")
             cv.reps = Int(globalValues.currentRepPerSec);
             reppppin()
         }
@@ -83,6 +84,7 @@ class ReppinViewController: UIViewController {
         synth.speakUtterance(myUtterance)
         
         cv.setNeedsDisplay()
+        cv.setNeedsLayout()
     }
     
     func settttin() {

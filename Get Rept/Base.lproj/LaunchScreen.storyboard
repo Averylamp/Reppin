@@ -16,7 +16,27 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchImage" highlightedImage="launchImage" translatesAutoresizingMaskIntoConstraints="NO" id="CFr-U4-Pl2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weightlifting" translatesAutoresizingMaskIntoConstraints="NO" id="8cX-Gh-18X">
+                                <rect key="frame" x="230" y="230" width="140" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="VW8-wM-l6Z"/>
+                                    <constraint firstAttribute="height" constant="140" id="uGJ-Om-ibP"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CFr-U4-Pl2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="97D-nf-9Zn"/>
+                            <constraint firstItem="8cX-Gh-18X" firstAttribute="centerX" secondItem="CFr-U4-Pl2" secondAttribute="centerX" id="9EF-OZ-2Jj"/>
+                            <constraint firstItem="CFr-U4-Pl2" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="CAb-2T-SdZ"/>
+                            <constraint firstItem="CFr-U4-Pl2" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="DUt-3S-8dH"/>
+                            <constraint firstItem="8cX-Gh-18X" firstAttribute="centerY" secondItem="CFr-U4-Pl2" secondAttribute="centerY" id="HyO-zB-gqQ"/>
+                            <constraint firstItem="CFr-U4-Pl2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="vwr-b7-M1x"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +44,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launchImage" width="400" height="800"/>
+        <image name="weightlifting" width="2000" height="2739"/>
+    </resources>
 </document>

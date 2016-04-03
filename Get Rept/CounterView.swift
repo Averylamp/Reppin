@@ -160,8 +160,8 @@ class CounterView: UIView {
                 }
             }
         }
-        setLabel.text = "\(sets)"
-        counterLabel.text = "\(reps)"
+        setLabel.text = "\(Int(sets))"
+        counterLabel.text = "\(Int(reps))"
     }
     
     func startPressed() {
