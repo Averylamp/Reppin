@@ -58,8 +58,8 @@ vector<double> MASTER_track_area;
 //List<Integer> MASTER_track_y = new ArrayList<Integer>();
 //List<Double> MASTER_track_area = new ArrayList<Double>();
 
-static int BALL_MOVEMENT_THRESHOLD = 40; // what Y axis change is mvement
-static int NO_MOVEMENT_TIME_THRESHOLD = 90; // how many frames for no motion
+static int BALL_MOVEMENT_THRESHOLD = 20; // what Y axis change is mvement
+static int NO_MOVEMENT_TIME_THRESHOLD = 15; // how many frames for no motion
 
 static int DRIBBLE_PEAK_THRESHOLD = 125; // was 35
 static int CROSSOVER_THRESHOLD = 85;
@@ -68,7 +68,7 @@ static int BALL_MIN_RADIUS = 20;
 static int BALL_MAX_RADIUS = 90;
 
 
-static int FRAMES_TO_CALC = 30; // how many frames to calculate dribble rate
+static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
 //int errorPersist=0;
 
 // THIS IS THE MAIN CODE FOR TRACKING, IT RETURNS THE PROCESSED FRAME AND STORES THE POSITION
@@ -133,10 +133,12 @@ static int FRAMES_TO_CALC = 30; // how many frames to calculate dribble rate
         // Calculate the Bounding Area of the Contour
         double area = cv::contourArea(contours[maxContour_id]);
         cv::Rect rc = cv::boundingRect(contours[maxContour_id]);
-        
+//        cv::rectangle(mCameraFrame, rc.tl(), rc.br(),  cv::Scalar(0, 255, 255));
+        cv::rectangle(mCameraFrame, rc, Scalar(0,0,255),4, 8, 0);
+
         // Draw a Circle Around the Ball
-        DrawBall(mColorMask,rc.x+rc.width/2, rc.y+rc.height/2 );
-        DrawBall(mCameraFrame, rc.x+rc.width/2,rc.y+rc.height/2 );
+//        DrawBall(mColorMask,rc.x+rc.width/2, rc.y+rc.height/2 );
+//        DrawBall(mCameraFrame, rc.x+rc.width/2,rc.y+rc.height/2 );
         
         int currentX = rc.x + rc.width / 2;
         int currentY = rc.y + rc.height / 2;
@@ -144,6 +146,8 @@ static int FRAMES_TO_CALC = 30; // how many frames to calculate dribble rate
         int deltaY = abs( global.tracking_last_position[1] - currentY  );
         int delta = (int) sqrt( deltaX*deltaX + deltaY*deltaY);
 
+        
+//        NSLog(@"X - %d, Y - %d, dX - %d, dY - %d, ",currentX, currentY, deltaX, deltaY);
         global.tracking_last_position[0] = currentX;
         global.tracking_last_position[1] = currentY;
         
@@ -151,7 +155,7 @@ static int FRAMES_TO_CALC = 30; // how many frames to calculate dribble rate
         // Save Ball Tracking Data
         saveTrackingData(rc.x, rc.y, area); // Save the ball position data
      
-        calcDribbleRate();
+        calcUpDownRate();
         
         // Display DebugText on Screen
         DebugText_Ball(mColorMask, area, ballSizedContours,rc.width,rc.height);
@@ -160,21 +164,23 @@ static int FRAMES_TO_CALC = 30; // how many frames to calculate dribble rate
  
     
     // Turn Debug on or Off
-    if (true){
-        mColorMask.copyTo(mCameraFrame);  // useful for seeing the raw filtered data on screen
-    }
+//    if (true){
+//        mColorMask.copyTo(mCameraFrame);  // useful for seeing the raw filtered data on screen
+//    }
     
     
     // Calculate the Remaining Time for Tracking
     int timeInt = (global.TRACKING_TIME_DURATION - TrackingDuration());
     timeLeft = std::to_string(timeInt);
-    NSLog(@"t= %d",timeInt);
+    
+//    NSLog(@"t= %d",timeInt);
 
 
     // If the Time is Up
     if (TrackingDuration() >= global.TRACKING_TIME_DURATION) {
 #pragma mark - Analytics Function Commented
 //        Analytics();	// Calculate the Analytics
+        NSLog(@"ENDED");
         global.STATE = global.ANALYTICS;
     }
   
@@ -302,7 +308,7 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
     double timestamp = CACurrentMediaTime() * 1000; // timestamp in milliseconds
     double pos[] = { timestamp, (double) x, (double) y, area };
     
-     NSLog(@"Save Timestamp = %f", timestamp);
+//     NSLog(@"Save Timestamp = %f", timestamp);
 
   //  y = 400 - y; // Invert it because tracking is backwards on Android
     
@@ -332,11 +338,11 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
 
 
 
- void calcDribbleRate() {
+ void calcUpDownRate() {
     if (trackIndex % FRAMES_TO_CALC == 0) {
         std::vector<int> pks = peakdetect(track_y,DRIBBLE_PEAK_THRESHOLD);
-        
-        if (pks.size() >= 3) { // if there are 3 peaks detected
+        NSLog(@"Finding peaks");
+        if (pks.size() > 0) { // if there are 3 peaks detected
             double* temp = new double[pks.size()];
             double sum = 0;
             for (int i = 1; i < pks.size(); i++) {
@@ -349,20 +355,20 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
           
 
             dribbleRate = 1.0 / avg;
-
-/*            NSLog(@"# Peaks = %d", (pks.size() - 1) );
+            
+            NSLog(@"# Peaks = %d", (pks.size() - 1) );
             NSLog(@"Avg Delta Peak = %f", avg);
             NSLog(@"DPS = %f", dribbleRate);
             NSLog(@"Length Before = %ld", track_x.size() );
-*/
+
             
             int lastPeak = pks.at(pks.size() - 1);
             
             // pop everything in List form 0 to lastPeak
-            track_x.erase(track_x.begin(),track_x.begin()+ lastPeak);
-            track_y.erase(track_y.begin(), track_y.begin()+lastPeak);
-            track_t.erase(track_t.begin(), track_t.begin()+lastPeak);
-            track_area.erase(track_area.begin(), track_area.begin()+lastPeak);
+//            track_x.erase(track_x.begin(),track_x.begin()+ lastPeak);
+//            track_y.erase(track_y.begin(), track_y.begin()+lastPeak);
+//            track_t.erase(track_t.begin(), track_t.begin()+lastPeak);
+//            track_area.erase(track_area.begin(), track_area.begin()+lastPeak);
             
      //       NSLog(@"Length After = %ld", track_x.size() );
 
@@ -461,6 +467,7 @@ void applyMask(cv::Mat mCameraFrame, cv::Mat mColorMask, cv::Mat mFilteredFrame)
      if (first_timestamp > 0) {
         return (int) ((timestamp - first_timestamp));
     } else {
+        NSLog(@"STaRTED");
         first_timestamp = timestamp;
         return 0;
     }
