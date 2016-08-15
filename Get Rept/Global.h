@@ -47,22 +47,6 @@
 
 @property int CONFIDENCE_THRESHOLD; // percentage confidence for a logo
 
-@property int TRAINING_FREESTYLE;
-
-@property int CALIBRATE_FRAME_WIDTH;
-@property int CALIBRATE_FRAME_HEIGHT;
-
-@property int TRACKING_FRAME_WIDTH;
-@property int TRACKING_FRAME_HEIGHT;
-
-
-@property int HUNDRED_dribbleRate;
-@property int HUNDRED_maxDribbleRate;
-@property int HUNDRED_heightConsistency;
-@property int HUNDRED_numCrossovers;
-@property int HUNDRED_crossoverWidth;
-@property int HUNDRED_locationAccuracy;
-
 @property int* S_limit;
 @property int* V_limit;
 //public static int[] S_limit = new int[2];
@@ -81,25 +65,6 @@
 @property NSString* SessionKey;
 
 
-
-@property int INVITED_STATUS;
-@property int ACTIVE_STATUS;
-@property int COMPLETED_STATUS;
-
-
-@property int TRAINING_SESSION;
-@property int CHALLENGE_SESSION;
-
-@property int SPEED_DRIBBLING;
-@property int MAX_CROSSOVERS;
-@property int FATIGUE_CHALLENGE;
-
-@property int FREESTYLE;
-@property int MAX_DRIBBLE_SPEED;
-@property int FAST_AND_HIGH;
-@property int FATIGUE_TEST;
-@property int CROSSOVER;
-@property int CROSSOVER_ADVANCED;
 
 @property int* tracking_last_position;
 

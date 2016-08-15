@@ -72,29 +72,7 @@
     [self.deviceInput.device lockForConfiguration:nil];
     [self.deviceInput.device setWhiteBalanceMode:AVCaptureWhiteBalanceModeLocked];
     [self.deviceInput.device unlockForConfiguration];
-    
-    //Frame Rate boost
-//    for(AVCaptureDeviceFormat *vFormat in [videoDevice formats] )
-//    {
-//        CMFormatDescriptionRef description= vFormat.formatDescription;
-//        float maxrate=((AVFrameRateRange*)[vFormat.videoSupportedFrameRateRanges objectAtIndex:0]).maxFrameRate;
-//        NSLog(@"Max Rate - %f",maxrate);
-//        if(maxrate>59 && CMFormatDescriptionGetMediaSubType(description)==kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
-//        {
-//            if ( YES == [videoDevice lockForConfiguration:NULL] )
-//            {
-//                videoDevice.activeFormat = vFormat;
-//                [videoDevice setActiveVideoMinFrameDuration:CMTimeMake(10,600)];
-//                [videoDevice setActiveVideoMaxFrameDuration:CMTimeMake(10,600)];
-//                [videoDevice unlockForConfiguration];
-//                NSLog(@"formats  %@ %@ %@",vFormat.mediaType,vFormat.formatDescription,vFormat.videoSupportedFrameRateRanges);
-//            }
-//        }
-//    }
-    
-    
-    
-    // (4) Configure output port for captureSession
+        // (4) Configure output port for captureSession
     [self addVideoDataOutput];
     
     // (5) Start captureSession running

@@ -70,7 +70,6 @@
 -(void)viewDidAppear:(BOOL)animated{
     Global * global = [Global sharedManager];
     global.STATE = global.DETECT_PERSON;
-    NSLog(@"State - %d", global.LOGO_DETECTION);
     [self.videoSource.captureSession startRunning];
     [self.imageProcessor clearTrackingDurations];
 }
@@ -123,12 +122,7 @@
         Global *global = [Global sharedManager];
         if (global.STATE == 3){ // if Global State == Analytics
             [self.videoSource.captureSession stopRunning];
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:
-                                        @"Main" bundle:[NSBundle mainBundle]];
             
-            
-            // AVERY: STOP THE THREAD WITH ALL THE CAMERA FRAMES
-            // AVERY: OPEN A NEW VIEW CONTROLLER
         }
         
         CGImageRelease(newImage);

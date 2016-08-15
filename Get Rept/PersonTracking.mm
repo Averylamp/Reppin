@@ -24,7 +24,7 @@ static String TAG = "BallTracking";
 int lastX = 0;
 int lastY = 0;
 
-int minBallArea = 900;
+int minArea = 900;
 
 int nomovement_counter = 0;
 
@@ -50,15 +50,14 @@ vector<double> MASTER_track_area;
 
 std::vector<int> repData;
 
-static int DRIBBLE_PEAK_THRESHOLD = 125; // was 35
+static int PEAK_THRESHOLD = 125; // was 35
 
 static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
 //int errorPersist=0;
 
 // THIS IS THE MAIN CODE FOR TRACKING, IT RETURNS THE PROCESSED FRAME AND STORES THE POSITION
 -(UIImage*) Track:(cv::Mat) mCameraFrame {
-    int screenWidth = mCameraFrame.cols;
-    int screenHeight = mCameraFrame.rows;
+    
     
     Global *global = [Global sharedManager];
     
@@ -110,25 +109,20 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
     
     int* response = findBiggestContour(contours, mColorMask);
     int maxContour_id = response[0];
-    int ballSizedContours = response[1];
     
     // If there was a Contour detected
     if (maxContour_id != -1) {
         // Calculate the Bounding Area of the Contour
         double area = cv::contourArea(contours[maxContour_id]);
         cv::Rect rc = cv::boundingRect(contours[maxContour_id]);
-//        cv::rectangle(mCameraFrame, rc.tl(), rc.br(),  cv::Scalar(0, 255, 255));
         cv::rectangle(mCameraFrame, rc, Scalar(0,255,0),2, 8, 0);
 
-        // Draw a Circle Around the Ball
-//        DrawBall(mColorMask,rc.x+rc.width/2, rc.y+rc.height/2 );
-//        DrawBall(mCameraFrame, rc.x+rc.width/2,rc.y+rc.height/2 );
-        
+
         int currentX = rc.x + rc.width / 2;
         int currentY = rc.y + rc.height / 2;
-        int deltaX = abs( global.tracking_last_position[0] - currentX  );
-        int deltaY = abs( global.tracking_last_position[1] - currentY  );
-        int delta = (int) sqrt( deltaX*deltaX + deltaY*deltaY);
+//        int deltaX = abs( global.tracking_last_position[0] - currentX  );
+//        int deltaY = abs( global.tracking_last_position[1] - currentY  );
+//        int delta = (int) sqrt( deltaX*deltaX + deltaY*deltaY);
 
         
 //        NSLog(@"X - %d, Y - %d, dX - %d, dY - %d, ",currentX, currentY, deltaX, deltaY);
@@ -144,8 +138,6 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
          
             calcUpDownRate();
             
-            // Display DebugText on Screen
-//            DebugText_Ball(mColorMask, area, ballSizedContours,rc.width,rc.height);
         }
     }// endif there was a contour detected
  
@@ -160,9 +152,6 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
     int timeInt = (global.TRACKING_TIME_DURATION - TrackingDuration());
     timeLeft = std::to_string(timeInt);
     
-//    NSLog(@"t= %d",timeInt);
-
-
     // If the Time is Up
     if (global.currentRepCount == global.repsPerSet) {
 #pragma mark - Analytics Function Commented
@@ -182,9 +171,6 @@ static int FRAMES_TO_CALC = 15; // how many frames to calculate Exercise rate
         global.STATE = global.WAIT_FOR_START;
         
     }
-  
-    
-    
     // if Tracking Error Detected
     // change the State to Global.ERROR_TRACKING
     // Return the Processed Camera Frame
@@ -215,55 +201,27 @@ static UIImage* cvMatToUIImage(const cv::Mat& m) {
 void HighlightIssues(vector<vector<cv::Point>> contours, Mat mFrame) {
     for (int i = 0; i < contours.size(); i++) { // for each contour
         int area = (int) cv::contourArea(contours[i]); // calculate the area
-        if (area > minBallArea) {
+        if (area > minArea) {
             cv::drawContours(mFrame, contours, i, cv::Scalar(0,255,0));
         }
-        /*	Rect rc = Imgproc.boundingRect(contours.get(i)); // get a bounding box around it
-         int diameter = (int) Math.sqrt( (rc.width*rc.width) + (rc.height*rc.height) );
-         // if there are any largish contours, consider them ball sized
-         if (diameter/2 >= BALL_MIN_RADIUS/1.2 && diameter/2 <= BALL_MAX_RADIUS) {
-         Imgproc.drawContours(mFrame, contours, i, new Scalar(0,255,0), 5);
-         
-         }*/
+        
     }
 }
-void DebugText_Ball(cv::Mat mColorMask, double area, int ballSizedContours, int width, int height){
-    int diameter = (int) sqrt( (width*width) + (height*height) );
-    cv::putText(mColorMask, "r="+ std::to_string(diameter/2), cv::Point(230,120), FONT_HERSHEY_DUPLEX, 0.5, cv::Scalar(200,200,250));
-//    cv::putText(mColorMask, "r="+Integer.toString(diameter/2), new Point(230, 120),
-//                 Core.FONT_HERSHEY_DUPLEX, .5, new Scalar(200, 200, 250), 1);
-    cv::putText(mColorMask, "A="+ std::to_string((int)area), cv::Point(230,140), FONT_HERSHEY_DUPLEX, 0.5, cv::Scalar(200,200,250));
-//    Core.putText(mColorMask, "A= "+ Integer.toString( (int) area ), new Point(230, 140),
-//                 Core.FONT_HERSHEY_DUPLEX, .5, new Scalar(200, 200, 250), 1);
-    cv::putText(mColorMask, "BS="+ std::to_string((int)ballSizedContours), cv::Point(230,160), FONT_HERSHEY_DUPLEX, 0.5, cv::Scalar(200,200,250));
-//    Core.putText(mColorMask, "BS= "+ Integer.toString( (int) ballSizedContours ), new Point(230, 160),
-//                 Core.FONT_HERSHEY_DUPLEX, .5, new Scalar(200, 200, 250), 1);
-    
-}
-
-void DrawBall(cv::Mat srcMat,int x ,int y) {
-    int BALL_DRAW_RADIUS =  80; // was 40
-    int BALL_CIRCLE_THICKNESS = 8;
-    // Draw a Circle
-    
-    cv::circle(srcMat, cv::Point(x,y), BALL_DRAW_RADIUS, cv::Scalar(255,0,0,255),BALL_CIRCLE_THICKNESS);}
 
 int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
     int* response = new int[2];
     
     int maxArea =0;
-    int ballSizedContours=0;
+    int largeSizedContours=0;
     int maxContour_id=-1;
     
     for (int i = 0; i < contours.size(); i++) { // for each contour
         
-        cv::Rect rc = cv::boundingRect(contours[i]); // get a bounding box around it
-        int diameter = (int)  sqrt( (rc.width * rc.width) + (rc.height * rc.height) );
         int area = (int) contourArea(contours[i]); // calculate the area
         
         
-        if (area > minBallArea) {
-            ballSizedContours+=1;
+        if (area > minArea) {
+            largeSizedContours+=1;
 
             cv::drawContours(mColorMask, contours, i, cv::Scalar(255,255,255),-1);
             
@@ -276,29 +234,11 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
         else {
             cv::drawContours(mColorMask, contours, i, cv::Scalar(255,255,255));
         }
-        // if there are any largish contours, consider them ball sized
-        //	if (diameter/2 >= BALL_MIN_RADIUS/1.5 && diameter/2 <= BALL_MAX_RADIUS) {
-        //		ballSizedContours+=1;
-        //	}
-        
-        
-        
-        /*
-         if (diameter/2 >= BALL_MIN_RADIUS
-         && diameter/2 <= BALL_MAX_RADIUS)
-         //		&& rc.width <= rc.height * 2 // was both 1.6
-         //		&& rc.height <= rc.width * 2)
-         {
-         
-         if (maxArea < area) { // if this is the largest area so far
-         maxArea = area; // update the variables
-         maxContour_id = i;
-         }
-         }  */
+       
     } // end for all contours
     
     response[0] = maxContour_id;
-    response[1] = ballSizedContours;
+    response[1] = largeSizedContours;
     
     return response;
 }
@@ -328,18 +268,12 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
 }
 //
 //// Global Variables for Dribble Stuff
- static double maxDribbleRate = 0;
- static int totalDribbles=0;
- static int numCrossovers = 0;
- static int heightAccuracy = 0;
- static int locationAccuracy = 0;
- static double crossoverWidth = 0;
 
 
 
  void calcUpDownRate() {
     if (trackIndex % FRAMES_TO_CALC == 0) {
-        std::vector<int> pks = peakdetect(track_y,DRIBBLE_PEAK_THRESHOLD);
+        std::vector<int> pks = peakdetect(track_y,PEAK_THRESHOLD);
         NSLog(@"Finding peaks");
         if (pks.size() > 0) { // if there are 3 peaks detected
             double* temp = new double[pks.size()];
@@ -367,16 +301,7 @@ int* findBiggestContour(vector<vector<cv::Point>> contours,cv::Mat mColorMask) {
             Global *global = [Global sharedManager];
             global.currentRepCount = pks.size();
             global.currentRepPerSec = repRate;
-            int lastPeak = pks.at(pks.size()-1);
             
-            // pop everything in List form 0 to lastPeak
-//            track_x.erase(track_x.begin(),track_x.begin()+ lastPeak);
-//            track_y.erase(track_y.begin(), track_y.begin()+lastPeak);
-//            track_t.erase(track_t.begin(), track_t.begin()+lastPeak);
-//            track_area.erase(track_area.begin(), track_area.begin()+lastPeak);
-            
-     //       NSLog(@"Length After = %ld", track_x.size() );
-
             
         }
     }
@@ -479,10 +404,5 @@ void applyMask(cv::Mat mCameraFrame, cv::Mat mColorMask, cv::Mat mFilteredFrame)
 -(void)clearTrackingDuration{
     clear_TrackingDuration();
 }
-//
-//
-//
-// void findContours(Mat mColorMask, List<MatOfPoint> contours) {
-//    Imgproc.findContours(mColorMask, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-//}
+
 @end

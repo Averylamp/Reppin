@@ -14,6 +14,5 @@
 @property cv::Mat image_copy;
 
 - (UIImage*)processImage:(UIImage*)image debug:(BOOL) deb values:(NSArray*) vals;
-+ (NSArray*) getColorAtPoint: (CGPoint)point fromImage:(UIImage*)img;
 -(void)clearTrackingDurations;
 @end

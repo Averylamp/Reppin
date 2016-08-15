@@ -33,9 +33,9 @@
 		BB0081841CB08F7500BA86C7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081781CB08F7400BA86C7 /* QuartzCore.framework */; };
 		BB0081851CB08F7500BA86C7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0081791CB08F7400BA86C7 /* CoreVideo.framework */; };
 		BB0081861CB08F7500BA86C7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB00817A1CB08F7400BA86C7 /* AssetsLibrary.framework */; };
-		BB2854621CB0DB6700E277C3 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2854611CB0DB6700E277C3 /* opencv2.framework */; };
 		BB294E841CB16F4C009F6BAB /* EndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB294E831CB16F4C009F6BAB /* EndViewController.swift */; };
 		BB294E861CB16F67009F6BAB /* EndViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB294E851CB16F67009F6BAB /* EndViewController.xib */; };
+		BB41F08F1D61D6830004061D /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2854611CB0DB6700E277C3 /* opencv2.framework */; };
 		BBEE63811CB08F0400AF4FE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE63801CB08F0400AF4FE2 /* AppDelegate.swift */; };
 		BBEE63831CB08F0400AF4FE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE63821CB08F0400AF4FE2 /* ViewController.swift */; };
 		BBEE63861CB08F0400AF4FE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBEE63841CB08F0400AF4FE2 /* Main.storyboard */; };
@@ -122,7 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB2854621CB0DB6700E277C3 /* opencv2.framework in Frameworks */,
+				BB41F08F1D61D6830004061D /* opencv2.framework in Frameworks */,
 				BB0081801CB08F7500BA86C7 /* OpenGLES.framework in Frameworks */,
 				BB00817F1CB08F7500BA86C7 /* AVFoundation.framework in Frameworks */,
 				BB00817C1CB08F7400BA86C7 /* CoreGraphics.framework in Frameworks */,
@@ -577,6 +577,8 @@
 					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
+					"$(PROJECT_DIR)/Get",
+					Rept,
 				);
 				INFOPLIST_FILE = "Get Rept/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
@@ -600,6 +602,8 @@
 					"$(PROJECT_DIR)/Get",
 					Rept,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Get",
+					Rept,
 					"$(PROJECT_DIR)/Get",
 					Rept,
 					"$(PROJECT_DIR)/Get",
